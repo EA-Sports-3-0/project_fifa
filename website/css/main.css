@@ -95,7 +95,54 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+.buffer{
+    clear: both;
+}
 
+body{
+    background-color: transparent;
+}
+
+html{
+    background: #396039; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#396039, #5fa05f); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#396039, #5fa05f); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#396039, #5fa05f); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#396039, #5fa05f); /* Standard syntax */
+    background-repeat: no-repeat;
+    height: 100%
+}
+
+.page-header{
+    background-color: #98fb98;
+    margin: 0;
+    margin-bottom: 5px;
+    border: 2px solid #5fa05f;
+}
+
+.title{
+    text-align: center;
+}
+
+.main-content{
+    background-color: #98fb98;
+    padding: 10px;
+    border: 2px solid #5fa05f;
+}
+
+.input-group{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-around;
+}
+
+input{
+    padding: 3px;
+    border-radius: 5px;
+}
 
 
 
