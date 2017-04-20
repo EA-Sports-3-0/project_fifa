@@ -144,6 +144,102 @@ input{
     border-radius: 5px;
 }
 
+/*********** main style *****************/
+
+.overzicht h3{
+    width: 500px;
+    display: flex;
+    justify-content: center;
+}
+#overzichtinhoud{
+    border-style: none;
+    width: 550px;
+    margin-bottom: 10px;
+    float: left;
+}
+.resultatenoverzicht{
+    width: 500px;
+    border-style: solid;
+    border-width: 2px;
+}
+.teamselect{
+    margin-top: 40px;
+    display: flex;
+    justify-content:space-around;
+}
+.aantalgoals{
+    height: 140px;
+    display: flex;
+    justify-content:space-around;
+}
+.aantalgoals p{
+    display: flex;
+    justify-content:center;
+}
+.aantalgoals input{
+    height: 80px;
+    width: 80px;
+}
+.scoorderselect{
+    height: 70px;
+    display: flex;
+    justify-content:space-around;
+}
+#scoorderbutton{
+    width: 60px;
+    height: 25px;
+}
+.submitoverzicht{
+    display: flex;
+    justify-content:center;
+}
+#submitoverzicht{
+    height: 40px;
+    width: 80px;
+    margin-bottom: 40px;
+}
+.tijdschema{
+    margin: 10px 0 10px 0;
+    width: 500px;
+    border-style: solid;
+    border-width: 2px;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 0 0 5px 5px;
+}
+.pouletitel{
+    display: flex;
+    justify-content:center;
+}
+.poulestanden{
+    border-style: solid;
+    border-width: 2px;
+    width: 500px;
+    float: right;
+}
+.topscoorder{
+    margin-top:10px;
+    border-style: solid;
+    border-width: 2px;
+    width: 500px;
+    float: right;
+}
+.topscoorder h1{
+    display: flex;
+    justify-content:center;
+}
+.topscoorder h2{
+    display: flex;
+    justify-content:center;
+}
+.topscoorder h3{
+    display: flex;
+    justify-content:center;
+}
+
+/*********** resultaten.php *****************/
 
 
 
