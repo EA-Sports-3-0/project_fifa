@@ -1,0 +1,67 @@
+.container{
+    border-style: solid;
+    border-width: 2px;
+    border-color: lightslategray;
+}
+header h1{
+    display: flex;
+    justify-content:center;
+}
+.navbar-default {
+    display: flex;
+    justify-content: space-around;
+}
+/******************* overzicht.php *****************/
+.invoer h3{
+    width: 1100px;
+    display: flex;
+    justify-content:center;
+}
+.invoer {
+    justify-content: center;
+}
+#createteaminhoud{
+    border-style:none;
+    width: 550px;
+    margin-bottom: 10px;
+    float: left;
+}
+.createteam{
+    width: 1100px;
+    border-style: solid;
+    border-width: 2px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding:20px;
+}
+.buttonteaminvoer{
+    width: 150px;
+    padding: 10px;
+}
+.players {
+    width: 115px;
+    margin: 0 0 20px 0;
+}
+.teamcolumn2 p {
+    margin: 0 0 0 0;
+}
+.otherteams {
+    margin: 20px 0 0 0;
+}
+
+.teamcolumn1 h2{
+text-align: center;
+}
+.teamcolumn2 h2{
+text-align: center;
+}
+.teamcolumn3 h2{
+text-align: center;
+}
+/*********** resultaten.php *****************/
+
