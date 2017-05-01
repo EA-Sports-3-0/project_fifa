@@ -5,17 +5,22 @@
 			<div class="title col-md-6 col-md-offset-3">
 				<h1>FIFA Dev Edition</h1>
 				<span>invoeren resultaten</span>
+				<ul class="nav nav-pills">
+					<li role="presentation"><a href="index.php">Home</a></li>
+					<li role="presentation" class="active"><a href="invoeren_resultaten.php">invoeren resultaten</a></li>
+					<li role="presentation"><a href="invoeren_T&S.php">invoeren T&S</a></li>
+					<li role="presentation"><a href="resultaten.php">resultaten</a></li>
+					<li role="presentation"><a href="finals.php">finals</a></li>
+				</ul>
 			</div>
 			<div class="buffer"></div>
 		</div>
-		<div class="main-content">
-			<!-- start content -->
-
+		<div class="main-content" id="invoeren_resultaten">
 			<div class="container" id="overzichtinhoud">
 	            <div class="overzicht">
 	            <h3>Overzicht</h3>
 	                <div class="resultatenoverzicht">
-	                	<form action="">
+	                	<form method="post" action="">
 		                    <div class="overzichtteam">
 		                        <div class="teamselect">
 		                            <select name="teams">
@@ -58,11 +63,11 @@
 		                        <div class="aantalgoals">
 		                            <div>
 		                                <p>Aantal goals</p>
-		                                <input type="text">
+		                                <input type="text" class="a_goals" maxlength="2" placeholder="00">
 		                            </div>
 		                            <div>
 		                                <p>Aantal goals</p>
-		                                <input type="text">
+		                                <input type="text" class="a_goals" maxlength="2" placeholder="00">
 		                            </div>
 		                        </div>
 		                        <div class="scoorderselect">
@@ -104,111 +109,119 @@
 	            </div>
 	            <div class="tijdschema">
 	                <h3>Tijdschema</h3>
-	                <table width="90%">
-	                    <tr>
-	                        <th>Team</th>
-	                        <th>Team</th>
-	                        <th>Tijd</th>
-	                    </tr>
-	                    <tr>
-	                        <th>Team 1</th>
-	                        <th>Team 2</th>
-	                        <th>10:00</th>
-	                    </tr>
-	                    <tr>
-	                        <th>Team 1</th>
-	                        <th>Team 2</th>
-	                        <th>10:00</th>
-	                    </tr>
-	                    <tr>
-	                        <th>Team 1</th>
-	                        <th>Team 2</th>
-	                        <th>10:00</th>
-	                    </tr>
-	                    <tr>
-	                        <th>Team 1</th>
-	                        <th>Team 2</th>
-	                        <th>10:00</th>
-	                    </tr>
-	                    <tr>
-	                        <th>Team 1</th>
-	                        <th>Team 2</th>
-	                        <th>10:00</th>
-	                    </tr>
-	                    <tr>
-	                        <th>Team 1</th>
-	                        <th>Team 2</th>
-	                        <th>10:00</th>
-	                    </tr>
-	                </table>
+	                <div class="content">
+		                <table width="90%">
+		                    <tr>
+		                        <th>Team</th>
+		                        <th>Team</th>
+		                        <th>Tijd</th>
+		                    </tr>
+		                    <tr>
+		                        <th>Team 1</th>
+		                        <th>Team 2</th>
+		                        <th>10:00</th>
+		                    </tr>
+		                    <tr>
+		                        <th>Team 1</th>
+		                        <th>Team 2</th>
+		                        <th>10:00</th>
+		                    </tr>
+		                    <tr>
+		                        <th>Team 1</th>
+		                        <th>Team 2</th>
+		                        <th>10:00</th>
+		                    </tr>
+		                    <tr>
+		                        <th>Team 1</th>
+		                        <th>Team 2</th>
+		                        <th>10:00</th>
+		                    </tr>
+		                    <tr>
+		                        <th>Team 1</th>
+		                        <th>Team 2</th>
+		                        <th>10:00</th>
+		                    </tr>
+		                    <tr>
+		                        <th>Team 1</th>
+		                        <th>Team 2</th>
+		                        <th>10:00</th>
+		                    </tr>
+		                </table>
+		            </div>
 	            </div>
 	        </div>
-	        <div class="pouletitel">
-	            <h3>Poulestanden</h3>
+	        <div class="container" id="poulestanden">
+	        	<div class="pouletitel">
+	            	<h3>Poulestanden</h3>
+		        </div>
+		        <div class="poulestanden">
+		        	<h3>poule A</h3>
+			        <div class="content">
+			            <table width="90%">
+			                <tr>
+			                    <th>Team</th>
+			                    <th>Score</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>3</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>3</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>3</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>3</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>3</th>
+			                </tr>
+			            </table>
+		            </div>
+		            <h3>poule B</h3>
+		            <div class="content">
+			            <table width="90%">
+			                <tr>
+			                    <th>Team</th>
+			                    <th>Score</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>3</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>3</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>3</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>3</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>3</th>
+			                </tr>
+			            </table>
+		            </div>
+		        </div>
+		        <div class="topscoorder">
+		            <h3><b>Topscoorder</b></h3>
+		            <h2>Team 3</h2>
+		            <h3><b>Aantal goals</b></h3>
+		            <h2>6</h2>
+		        </div>
 	        </div>
-	        <div class="poulestanden">
-
-	            <table width="90%">
-	                <h3>poule A</h3>
-	                <tr>
-	                    <th>Team</th>
-	                    <th>Score</th>
-	                </tr>
-	                <tr>
-	                    <th>Team 1</th>
-	                    <th>3</th>
-	                </tr>
-	                <tr>
-	                    <th>Team 1</th>
-	                    <th>3</th>
-	                </tr>
-	                <tr>
-	                    <th>Team 1</th>
-	                    <th>3</th>
-	                </tr>
-	                <tr>
-	                    <th>Team 1</th>
-	                    <th>3</th>
-	                </tr>
-	                <tr>
-	                    <th>Team 1</th>
-	                    <th>3</th>
-	                </tr>
-	            </table>
-	            <table width="90%">
-	                <h3>poule B</h3>
-	                <tr>
-	                    <th>Team</th>
-	                    <th>Score</th>
-	                </tr>
-	                <tr>
-	                    <th>Team 1</th>
-	                    <th>3</th>
-	                </tr>
-	                <tr>
-	                    <th>Team 1</th>
-	                    <th>3</th>
-	                </tr>
-	                <tr>
-	                    <th>Team 1</th>
-	                    <th>3</th>
-	                </tr>
-	                <tr>
-	                    <th>Team 1</th>
-	                    <th>3</th>
-	                </tr>
-	                <tr>
-	                    <th>Team 1</th>
-	                    <th>3</th>
-	                </tr>
-	            </table>
-	        </div>
-	        <div class="topscoorder">
-	            <h3><b>Topscoorder</b></h3>
-	            <h4>Team 3 Ik Natuurlijk</h4>
-	            <h3><b>Aantal goals</b></h3>
-	            <h2>6</h2>
-	        </div>
+	        
 			
 			<!-- stop content -->
 			<div class="buffer"></div>
