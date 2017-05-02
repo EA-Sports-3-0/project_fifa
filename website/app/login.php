@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         header("location:../public/index.php");
     }
 
-    $sql = "SELECT * FROM user_info 
+    $sql = "SELECT * FROM tbl_users
             WHERE username = '$myusername' &&
             password = '$mypassword'";
 
@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($match == 1) {
 
-        $sql = "SELECT admin FROM user_info WHERE username = '$myusername'";
+        $sql = "SELECT admin FROM tbl_users WHERE username = '$myusername'";
 
         $handler = mysqli_query($db, $sql);
 

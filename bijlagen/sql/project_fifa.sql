@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 13 apr 2017 om 11:24
--- Serverversie: 10.1.21-MariaDB
--- PHP-versie: 5.6.30
+-- Gegenereerd op: 02 mei 2017 om 12:29
+-- Serverversie: 5.7.14
+-- PHP-versie: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `project_fifa`
 --
-CREATE DATABASE IF NOT EXISTS `project_fifa` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `project_fifa`;
 
 -- --------------------------------------------------------
 
@@ -110,6 +108,26 @@ INSERT INTO `tbl_teams` (`id`, `poule_id`, `name`, `created_at`, `deleted_at`) V
 (1, 1, 'Ajax', '2017-04-13 09:42:45', NULL),
 (2, 1, 'PSV', '2017-04-13 09:42:45', NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `tbl_users`
+--
+
+CREATE TABLE `tbl_users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `tbl_users`
+--
+
+INSERT INTO `tbl_users` (`id`, `username`, `password`, `created_at`) VALUES
+(1, 'admin', 'ad12345', '2017-05-02 13:36:52');
+
 --
 -- Indexen voor geëxporteerde tabellen
 --
@@ -144,6 +162,12 @@ ALTER TABLE `tbl_teams`
   ADD UNIQUE KEY `name` (`name`);
 
 --
+-- Indexen voor tabel `tbl_users`
+--
+ALTER TABLE `tbl_users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
@@ -167,6 +191,11 @@ ALTER TABLE `tbl_poules`
 --
 ALTER TABLE `tbl_teams`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT voor een tabel `tbl_users`
+--
+ALTER TABLE `tbl_users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Beperkingen voor geëxporteerde tabellen
 --
