@@ -27,11 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $handler = mysqli_query($db, $sql);
 
-        $type = mysqli_fetch_assoc($handler);
-
-        var_dump($type);
         $_SESSION['valid'] = true;
-        $_SESSION['type'] = $type;
     }
     //send to home page.
     header("location:../public/index.php");
