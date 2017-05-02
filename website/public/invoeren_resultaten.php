@@ -20,6 +20,7 @@
 	            <div class="overzicht">
 	            <h3>Overzicht</h3>
 	                <div class="resultatenoverzicht">
+	                <!-- action still needs a send location. (line 24) -->
 	                	<form method="post" action="">
 		                    <div class="overzichtteam">
 		                        <div class="teamselect">
@@ -110,6 +111,7 @@
 	            <div class="tijdschema">
 	                <h3>Tijdschema</h3>
 	                <div class="content">
+	                <!-- the table's need to be redone in php to make then chance depending on the teams. (line 115-216) -->
 		                <table width="90%">
 		                    <tr>
 		                        <th>Team</th>
@@ -214,6 +216,7 @@
 			            </table>
 		            </div>
 		        </div>
+		        <!-- the topscoorder needs to chance depending on the current points (line 220-225) -->
 		        <div class="topscoorder">
 		            <h3><b>Topscoorder</b></h3>
 		            <h2>Team 3</h2>
@@ -222,7 +225,6 @@
 		        </div>
 	        </div>
 	        
-			
 			<!-- stop content -->
 			<div class="buffer"></div>
 		</div>

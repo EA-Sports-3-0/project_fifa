@@ -19,46 +19,47 @@
 			
 			<!-- start content -->
 			<div class="container" id="overzichtinhoud">
-		        .resultaten
-		        <div class="tijdschema">
-		            <h3>Tijdschema</h3>
-		            <table width="90%">
-		                <tr>
-		                    <th>Team</th>
-		                    <th>Team</th>
-		                    <th>Tijd</th>
-		                </tr>
-		                <tr>
-		                    <th>Team 1</th>
-		                    <th>Team 2</th>
-		                    <th>10:00</th>
-		                </tr>
-		                <tr>
-		                    <th>Team 1</th>
-		                    <th>Team 2</th>
-		                    <th>10:00</th>
-		                </tr>
-		                <tr>
-		                    <th>Team 1</th>
-		                    <th>Team 2</th>
-		                    <th>10:00</th>
-		                </tr>
-		                <tr>
-		                    <th>Team 1</th>
-		                    <th>Team 2</th>
-		                    <th>10:00</th>
-		                </tr>
-		                <tr>
-		                    <th>Team 1</th>
-		                    <th>Team 2</th>
-		                    <th>10:00</th>
-		                </tr>
-		                <tr>
-		                    <th>Team 1</th>
-		                    <th>Team 2</th>
-		                    <th>10:00</th>
-		                </tr>
-		            </table>
+		        <div class="resultaten">
+			        <div class="tijdschema">
+			            <h3>Tijdschema</h3>
+			            <table width="90%">
+			                <tr>
+			                    <th>Team</th>
+			                    <th>Team</th>
+			                    <th>Tijd</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>Team 2</th>
+			                    <th>10:00</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>Team 2</th>
+			                    <th>10:00</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>Team 2</th>
+			                    <th>10:00</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>Team 2</th>
+			                    <th>10:00</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>Team 2</th>
+			                    <th>10:00</th>
+			                </tr>
+			                <tr>
+			                    <th>Team 1</th>
+			                    <th>Team 2</th>
+			                    <th>10:00</th>
+			                </tr>
+			            </table>
+			        </div>
 		        </div>
 		    </div>
 		    <div class="pouletitel">
