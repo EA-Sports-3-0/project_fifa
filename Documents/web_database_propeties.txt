@@ -1,0 +1,32 @@
+tbl_matches:
+
+id = welke wedstrijd er eerst was welke 2e ect.
+
+team_id_a = welk team het thijs team is.
+team_id_b = welk team het uit team is.
+score_team_a = hoeveel punten team a heeft geskoort.
+score_team_b = hoeveel punten team b heeft geskoort.
+start_time = waneer de wedstrijd starte.
+
+============================================================
+
+tbl_players:
+
+student_id = de id van een speler (d123456).
+team_id = op welk team de speler zit.
+first_name & last_name = maakt samen de volle naam van de speler.
+
+=============================================================
+
+tbl_poules:
+
+id = welke poule het is.
+naam = de naam van de poule.
+
+=============================================================
+
+tbl_teams:
+
+id = de id van een team.
+poule_id = aan welke poule dit team vast hangt.
+name = de naam van het team.

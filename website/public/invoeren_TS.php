@@ -16,7 +16,7 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 					<?php 
 						if (isset($_SESSION['valid']) && $_SESSION['valid'] == true) {
 							echo '<li role="presentation"><a href="invoeren_resultaten.php">invoeren resultaten</a></li>';
-							echo '<li role="presentation" class="active"><a href="invoeren_T&S.php">invoeren T&S</a></li>';
+							echo '<li role="presentation" class="active"><a href="invoeren_TS.php">invoeren T&S</a></li>';
 						}
 						else{
 							echo '<li role="presentation"><a href="resultaten.php">resultaten</a></li>';

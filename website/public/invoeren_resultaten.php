@@ -4,6 +4,20 @@
 if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 	header('location:405.html');
 }
+
+if (isset($_GET['scoorder1'])) {
+	if (!isset($_SESSION['scoorder1'])) {
+    	$_SESSION['scoorder1'] = array();
+	}
+	array_push($_SESSION['scoorder1'], $_GET['scoorder1']);
+}
+
+if (isset($_GET['scoorder2'])) {
+	if (!isset($_SESSION['scoorder2'])) {
+    	$_SESSION['scoorder2'] = array();
+	}
+	array_push($_SESSION['scoorder2'], $_GET['scoorder2']);
+}
 ?>
 
     <div class="container">
@@ -16,7 +30,7 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 					<?php 
 						if (isset($_SESSION['valid']) && $_SESSION['valid'] == true) {
 							echo '<li role="presentation" class="active"><a href="invoeren_resultaten.php">invoeren resultaten</a></li>';
-							echo '<li role="presentation"><a href="invoeren_T&S.php">invoeren T&S</a></li>';
+							echo '<li role="presentation"><a href="invoeren_TS.php">invoeren T&S</a></li>';
 						}
 						else{
 							echo '<li role="presentation"><a href="resultaten.php">resultaten</a></li>';
@@ -33,7 +47,7 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 	            	<h3>Overzicht</h3>
 	                <div class="resultatenoverzicht">
 	                <!-- action still needs a send location. (line 24) -->
-	                	<form action="">
+	                	<form class="points" action="">
 		                    <div class="overzichtteam">
 		                        <div class="teamselect">
 		                            <select name="team1">
@@ -84,46 +98,66 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 		                            </div>
 		                        </div>
 		                    </div>
-		                    <div class="scoorderselect">
-	                            <div>
-	                            	<form action="">
-			                            <select name="scoorder1">
-			                                <option value="speler1">speler 1</option>
-			                                <option value="speler2">speler 2</option>
-			                                <option value="speler3">speler 3</option>
-			                                <option value="speler4">speler 4</option>
-			                                <option value="speler5">speler 5</option>
-			                                <option value="speler6">speler 6</option>
-			                                <option value="speler7">speler 7</option>
-			                                <option value="speler8">speler 8</option>
-			                                <option value="speler9">speler 9</option>
-			                                <option value="speler10">speler 10</option>
-			                            </select>
-			                            <input type="submit" value="Add1" class="btn btn-primary">
-	                                </form>
-	                            </div>
-	                            <div>
-		                            <form action="">
-		                            	<input type="submit" value="Add2" class="btn btn-primary">
-		                                <select name="scoorder2">
-		                                    <option value="speler1">speler 1</option>
-			                                <option value="speler2">speler 2</option>
-			                                <option value="speler3">speler 3</option>
-			                                <option value="speler4">speler 4</option>
-			                                <option value="speler5">speler 5</option>
-			                                <option value="speler6">speler 6</option>
-			                                <option value="speler7">speler 7</option>
-			                                <option value="speler8">speler 8</option>
-			                                <option value="speler9">speler 9</option>
-			                                <option value="speler10">speler 10</option>
-			                            </select>
-	                                </form>
-	                            </div>
-	                        </div>
-	                        <div class="submitoverzicht">
+		                    <div class="submitoverzicht">
 		                        <input type="submit" value="submit" class="btn btn-primary" id="submitoverzicht">
 		                    </div>
 	                    </form>
+	                    <div class="scoorderselect">
+                            <div class="scoorder1">
+                            	<form action="#">
+		                            <select name="scoorder1">
+		                                <option value="speler1">speler 1</option>
+		                                <option value="speler2">speler 2</option>
+		                                <option value="speler3">speler 3</option>
+		                                <option value="speler4">speler 4</option>
+		                                <option value="speler5">speler 5</option>
+		                                <option value="speler6">speler 6</option>
+		                                <option value="speler7">speler 7</option>
+		                                <option value="speler8">speler 8</option>
+		                                <option value="speler9">speler 9</option>
+		                                <option value="speler10">speler 10</option>
+		                            </select>
+		                            <input type="submit" value="Add1" class="btn btn-primary">
+                                </form>
+                                <ul>
+                                	<?php 
+                                	if (isset($_SESSION['scoorder1'])) {
+                                		foreach ($_SESSION['scoorder1'] as $scoorder) {
+                                			echo "<li>$scoorder</li>";
+                                		}
+                                	}
+                                	?>
+                                	<div class="buffer"></div>
+                                </ul>
+                            </div>
+                            <div class="scoorder2">
+	                            <form action="#">
+	                            	<input type="submit" value="Add2" class="btn btn-primary">
+	                                <select name="scoorder2">
+	                                    <option value="speler1">speler 1</option>
+		                                <option value="speler2">speler 2</option>
+		                                <option value="speler3">speler 3</option>
+		                                <option value="speler4">speler 4</option>
+		                                <option value="speler5">speler 5</option>
+		                                <option value="speler6">speler 6</option>
+		                                <option value="speler7">speler 7</option>
+		                                <option value="speler8">speler 8</option>
+		                                <option value="speler9">speler 9</option>
+		                                <option value="speler10">speler 10</option>
+		                            </select>
+                                </form>
+                                <ul>
+                                	<?php 
+                                	if (isset($_SESSION['scoorder2'])) {
+                                		foreach ($_SESSION['scoorder2'] as $scoorder) {
+                                			echo "<li>$scoorder</li>";
+                                		}
+                                	}
+                                	?>
+                                	<div class="buffer"></div>
+                                </ul>
+                            </div>
+                        </div>
 	                </div>
 	            </div>
 	            <div class="tijdschema">
