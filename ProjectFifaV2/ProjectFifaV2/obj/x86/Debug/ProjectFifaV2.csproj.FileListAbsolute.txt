@@ -53,3 +53,17 @@ C:\wamp64\www\!FIFA\project_fifa\ProjectFifaV2\ProjectFifaV2\obj\x86\Debug\Proje
 C:\wamp64\www\!FIFA\project_fifa\ProjectFifaV2\ProjectFifaV2\obj\x86\Debug\ProjectFifaV2.frmRanking.resources
 C:\wamp64\www\!FIFA\project_fifa\ProjectFifaV2\ProjectFifaV2\obj\x86\Debug\ProjectFifaV2.Properties.Resources.resources
 C:\wamp64\www\!FIFA\project_fifa\ProjectFifaV2\ProjectFifaV2\obj\x86\Debug\ProjectFifaV2.csproj.GenerateResource.Cache
+C:\Users\joeyo\Desktop\Radius\Jaar 1\Periode_4\PR\project_fifa\ProjectFifaV2\ProjectFifaV2\bin\Debug\ProjectFifaV2.exe.config
+C:\Users\joeyo\Desktop\Radius\Jaar 1\Periode_4\PR\project_fifa\ProjectFifaV2\ProjectFifaV2\obj\x86\Debug\ProjectFifaV2.exe
+C:\Users\joeyo\Desktop\Radius\Jaar 1\Periode_4\PR\project_fifa\ProjectFifaV2\ProjectFifaV2\obj\x86\Debug\ProjectFifaV2.pdb
+C:\Users\joeyo\Desktop\Radius\Jaar 1\Periode_4\PR\project_fifa\ProjectFifaV2\ProjectFifaV2\bin\Debug\db.mdf
+C:\Users\joeyo\Desktop\Radius\Jaar 1\Periode_4\PR\project_fifa\ProjectFifaV2\ProjectFifaV2\bin\Debug\db_log.ldf
+C:\Users\joeyo\Desktop\Radius\Jaar 1\Periode_4\PR\project_fifa\ProjectFifaV2\ProjectFifaV2\bin\Debug\ProjectFifaV2.exe
+C:\Users\joeyo\Desktop\Radius\Jaar 1\Periode_4\PR\project_fifa\ProjectFifaV2\ProjectFifaV2\bin\Debug\ProjectFifaV2.pdb
+C:\Users\joeyo\Desktop\Radius\Jaar 1\Periode_4\PR\project_fifa\ProjectFifaV2\ProjectFifaV2\obj\x86\Debug\ProjectFifaV2.csprojResolveAssemblyReference.cache
+C:\Users\joeyo\Desktop\Radius\Jaar 1\Periode_4\PR\project_fifa\ProjectFifaV2\ProjectFifaV2\obj\x86\Debug\ProjectFifaV2.frmAdmin.resources
+C:\Users\joeyo\Desktop\Radius\Jaar 1\Periode_4\PR\project_fifa\ProjectFifaV2\ProjectFifaV2\obj\x86\Debug\ProjectFifaV2.frmLogin.resources
+C:\Users\joeyo\Desktop\Radius\Jaar 1\Periode_4\PR\project_fifa\ProjectFifaV2\ProjectFifaV2\obj\x86\Debug\ProjectFifaV2.frmPlayer.resources
+C:\Users\joeyo\Desktop\Radius\Jaar 1\Periode_4\PR\project_fifa\ProjectFifaV2\ProjectFifaV2\obj\x86\Debug\ProjectFifaV2.frmRanking.resources
+C:\Users\joeyo\Desktop\Radius\Jaar 1\Periode_4\PR\project_fifa\ProjectFifaV2\ProjectFifaV2\obj\x86\Debug\ProjectFifaV2.Properties.Resources.resources
+C:\Users\joeyo\Desktop\Radius\Jaar 1\Periode_4\PR\project_fifa\ProjectFifaV2\ProjectFifaV2\obj\x86\Debug\ProjectFifaV2.csproj.GenerateResource.Cache

@@ -17,16 +17,15 @@ namespace ProjectFifaV2
             //SqlCeEngine engine = new SqlCeEngine(@"Data Source=.\DB.sdf");
             //engine.Upgrade(@"Data Source=.\DB2.sdf");
 
-
             string Path = Environment.CurrentDirectory;
             string[] appPath = Path.Split(new string[] { "bin" }, StringSplitOptions.None);
             AppDomain.CurrentDomain.SetData("DataDirectory", appPath[0]);
-
             con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\db.mdf';Integrated Security=True;Connect Timeout=30");
         }
 
         public void TestConnection()
         {
+            con.Close();
             bool open = false;
             
             try

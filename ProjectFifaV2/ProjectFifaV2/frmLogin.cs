@@ -22,7 +22,6 @@ namespace ProjectFifaV2
             InitializeComponent();
             dbh = new DatabaseHandler();
             frmAdmin = new frmAdmin();
-            frmRanking = new frmRanking();
             //frmPlayer = new frmPlayer(frmRanking);
         }
 
@@ -50,13 +49,19 @@ namespace ProjectFifaV2
                 }
                 else
                 {
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO [tblUsers] ([Username], [Password], [IsAdmin]) VALUES (@Username, @Password, @IsAdmin)"))
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO [tblUsers] ([Username], [Password], [IsAdmin], [Score]) VALUES (@Username, @Password, @IsAdmin, @Score)"))
                     {
                         cmd.Parameters.AddWithValue("Username", txtUsername.Text);
                         cmd.Parameters.AddWithValue("Password", txtPassword.Text);
                         cmd.Parameters.AddWithValue("IsAdmin", 0);
+                        cmd.Parameters.AddWithValue("Score", 0);
                         cmd.Connection = dbh.GetCon();
                         cmd.ExecuteNonQuery();
+
+                        txtUsername.Text = "";
+                        txtPassword.Text = "";
+
+                        MessageBox.Show("Succesfully registered");
                     }
                 }
 
@@ -79,6 +84,7 @@ namespace ProjectFifaV2
 
         private void btnShowRanking_Click(object sender, EventArgs e)
         {
+            frmRanking = new frmRanking();
             frmRanking.Show(); 
         }
 
