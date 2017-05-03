@@ -1,10 +1,16 @@
 <?php require("head.php"); session_start();?>
 
+<?php 
+if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
+	header('location:405.html');
+}
+?>
+
     <div class="container">
 		<div class="page-header">
 			<div class="title col-md-6 col-md-offset-3">
 				<h1>FIFA Dev Edition</h1>
-				<span>invoeren resultaten.</span>
+				<span>invoeren resultaten</span>
 				<ul class="nav nav-pills">
 					<li role="presentation"><a href="index.php">Home</a></li>
 					<?php 
@@ -24,13 +30,13 @@
 		<div class="main-content" id="invoeren_resultaten">
 			<div class="container" id="overzichtinhoud">
 	            <div class="overzicht">
-	            <h3>Overzicht</h3>
+	            	<h3>Overzicht</h3>
 	                <div class="resultatenoverzicht">
 	                <!-- action still needs a send location. (line 24) -->
-	                	<form method="post" action="">
+	                	<form action="">
 		                    <div class="overzichtteam">
 		                        <div class="teamselect">
-		                            <select name="teams">
+		                            <select name="team1">
 		                                <option value="team1">team 1</option>
 		                                <option value="team2">team 2</option>
 		                                <option value="team3">team 3</option>
@@ -48,7 +54,7 @@
 		                                <option value="team15">team 15</option>
 		                                <option value="team16">team 16</option>
 		                            </select>
-		                            <select name="teams">
+		                            <select name="team2">
 		                                <option value="team1">team 1</option>
 		                                <option value="team2">team 2</option>
 		                                <option value="team3">team 3</option>
@@ -70,45 +76,51 @@
 		                        <div class="aantalgoals">
 		                            <div>
 		                                <p>Aantal goals</p>
-		                                <input type="text" class="a_goals" maxlength="2" placeholder="00">
+		                                <input name="point1" type="text" class="a_goals" maxlength="2" placeholder="00">
 		                            </div>
 		                            <div>
 		                                <p>Aantal goals</p>
-		                                <input type="text" class="a_goals" maxlength="2" placeholder="00">
-		                            </div>
-		                        </div>
-		                        <div class="scoorderselect">
-		                            <div>
-		                                <select name="scoorder">
-		                                    <option value="speler">speler 1</option>
-		                                    <option value="speler">speler 2</option>
-		                                    <option value="speler">speler 3</option>
-		                                    <option value="speler">speler 4</option>
-		                                    <option value="speler">speler 5</option>
-		                                    <option value="speler">speler 6</option>
-		                                    <option value="speler">speler 7</option>
-		                                    <option value="speler">speler 8</option>
-		                                    <option value="speler">speler 9</option>
-		                                    <option value="speler">speler 10</option>
-		                                </select>
-		                            </div>
-		                            <div>
-		                                <select name="scoorder">
-		                                    <option value="speler">speler 1</option>
-		                                    <option value="speler">speler 2</option>
-		                                    <option value="speler">speler 3</option>
-		                                    <option value="speler">speler 4</option>
-		                                    <option value="speler">speler 5</option>
-		                                    <option value="speler">speler 6</option>
-		                                    <option value="speler">speler 7</option>
-		                                    <option value="speler">speler 8</option>
-		                                    <option value="speler">speler 9</option>
-		                                    <option value="speler">speler 10</option>
-		                                </select>
+		                                <input name="point2" type="text" class="a_goals" maxlength="2" placeholder="00">
 		                            </div>
 		                        </div>
 		                    </div>
-		                    <div class="submitoverzicht">
+		                    <div class="scoorderselect">
+	                            <div>
+	                            	<form action="">
+			                            <select name="scoorder1">
+			                                <option value="speler1">speler 1</option>
+			                                <option value="speler2">speler 2</option>
+			                                <option value="speler3">speler 3</option>
+			                                <option value="speler4">speler 4</option>
+			                                <option value="speler5">speler 5</option>
+			                                <option value="speler6">speler 6</option>
+			                                <option value="speler7">speler 7</option>
+			                                <option value="speler8">speler 8</option>
+			                                <option value="speler9">speler 9</option>
+			                                <option value="speler10">speler 10</option>
+			                            </select>
+			                            <input type="submit" value="Add1" class="btn btn-primary">
+	                                </form>
+	                            </div>
+	                            <div>
+		                            <form action="">
+		                            	<input type="submit" value="Add2" class="btn btn-primary">
+		                                <select name="scoorder2">
+		                                    <option value="speler1">speler 1</option>
+			                                <option value="speler2">speler 2</option>
+			                                <option value="speler3">speler 3</option>
+			                                <option value="speler4">speler 4</option>
+			                                <option value="speler5">speler 5</option>
+			                                <option value="speler6">speler 6</option>
+			                                <option value="speler7">speler 7</option>
+			                                <option value="speler8">speler 8</option>
+			                                <option value="speler9">speler 9</option>
+			                                <option value="speler10">speler 10</option>
+			                            </select>
+	                                </form>
+	                            </div>
+	                        </div>
+	                        <div class="submitoverzicht">
 		                        <input type="submit" value="submit" class="btn btn-primary" id="submitoverzicht">
 		                    </div>
 	                    </form>

@@ -1,10 +1,16 @@
 <?php require("head.php"); session_start();?>
 
+<?php 
+if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
+	header('location:405.html');
+}
+?>
+
     <div class="container">
 		<div class="page-header">
 			<div class="title col-md-6 col-md-offset-3">
 				<h1>FIFA Dev Edition</h1>
-				<span>invoeren Teams & Spelers.</span>
+				<span>invoeren Teams & Spelers</span>
 				<ul class="nav nav-pills">
 					<li role="presentation"><a href="index.php">Home</a></li>
 					<?php 

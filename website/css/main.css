@@ -121,6 +121,10 @@ body{
     border: 2px solid #5fa05f;
 }
 
+.page-header .nav{
+    margin-top: 5px;
+}
+
 .title{
     text-align: center;
 }
@@ -133,6 +137,7 @@ body{
     background-color: #98fb98;
     padding: 10px;
     border: 2px solid #5fa05f;
+    margin-bottom: 10px;
 }
 
 .input-group{
@@ -163,12 +168,12 @@ input{
 .main-content *{
     border-radius: 5px;
 }
-.overzicht h3{
+.overzicht h3, .containder#overzichtinhoud h3{
     width: 500px;
     display: flex;
     justify-content: center;
 }
-.main-content#invoeren_resultaten{
+.main-content#invoeren_resultaten, .main-content#resultaten{
     display: -webkit-flex;
     display: -moz-flex;
     display: -ms-flex;
@@ -235,10 +240,13 @@ input[type='text'].a_goals{
     margin-bottom: 40px;
 }
 .tijdschema{
-    margin: 10px 0 10px 0;
+    margin: 10px 0 0 0;
     width: 500px;
     border-style: solid;
     border-width: 2px;
+}
+.tijdschema#resultaten{
+    margin: 0;
 }
 .tijdschema h3, .poulestanden h3{
     display: -webkit-flex;
@@ -262,7 +270,7 @@ table, th, td {
     border-collapse: collapse;
     margin: 0;
 }
-.pouletitel{
+.pouletitel, .overzichttitel{
     display: flex;
     justify-content:center;
     width: 500px;

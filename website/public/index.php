@@ -4,7 +4,7 @@
 		<div class="page-header">
 			<div class="title col-md-6 col-md-offset-3">
 				<h1>FIFA Dev Edition</h1>
-				<span>Login voor toegang.</span>
+				<span>Login voor toegang</span>
 				<ul class="nav nav-pills">
 					<li role="presentation" class="active"><a href="index.php">Home</a></li>
 					<?php 
