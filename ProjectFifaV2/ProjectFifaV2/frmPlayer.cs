@@ -35,11 +35,14 @@ namespace ProjectFifaV2
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            Hide();
+            frmLogin login = new frmLogin();
+            login.Show();
+            Close();
         }
 
         private void btnShowRanking_Click(object sender, EventArgs e)
         {
+            frmRanking = new frmRanking();
             frmRanking.Show();
         }
 
@@ -48,7 +51,27 @@ namespace ProjectFifaV2
             DialogResult result = MessageBox.Show("Are you sure you want to clear your prediction?", "Clear Predictions", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if (result.Equals(DialogResult.OK))
             {
-                // Clear predections
+                dbh.OpenConnectionToDB();
+                DataTable hometable = dbh.FillDT("DELETE FROM [tblPredictions];");
+                dbh.CloseConnectionToDB();
+                // Clear predictions
+                // Update DB
+            } 
+        }
+
+        private void btnEditPrediction_Click(object sender, EventArgs e)
+        {
+            if (!DisableEditButton())
+            {
+                int userID = 1;
+                int gameID = 2;
+                int homeScore = 3;
+                int awayScore = 4;
+                dbh.OpenConnectionToDB();
+                DataTable hometable = dbh.FillDT("INSERT INTO [tblPredictions] VALUES ('1', '2', '3' , '4');");
+                dbh.CloseConnectionToDB();
+
+                // Edit predictions
                 // Update DB
             }
         }
@@ -57,7 +80,7 @@ namespace ProjectFifaV2
         {
             bool hasPassed;
             //This is the deadline for filling in the predictions
-            DateTime deadline = new DateTime(2014, 06, 12);
+            DateTime deadline = new DateTime(2017, 06, 15);
             DateTime curTime = DateTime.Now;
             int result = DateTime.Compare(deadline, curTime);
 
@@ -148,5 +171,6 @@ namespace ProjectFifaV2
         {
             userName = un;
         }
+
     }
 }

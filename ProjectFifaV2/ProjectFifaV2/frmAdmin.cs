@@ -30,7 +30,9 @@ namespace ProjectFifaV2
             txtQuery.Text = null;
             txtPath = null;
             dgvAdminData.DataSource = null;
-            Hide();
+            frmLogin login = new frmLogin();
+            login.Show();
+            Close();
         }
 
         private void btnExecute_Click(object sender, EventArgs e)

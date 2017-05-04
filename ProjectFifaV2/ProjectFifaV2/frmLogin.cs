@@ -85,7 +85,7 @@ namespace ProjectFifaV2
         private void btnShowRanking_Click(object sender, EventArgs e)
         {
             frmRanking = new frmRanking();
-            frmRanking.Show(); 
+            frmRanking.Show();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -119,10 +119,12 @@ namespace ProjectFifaV2
 
                 if (admin)
                 {
+                    Hide();
                     frmAdmin.Show();
                 }
                 else
                 {
+                    Hide();
                     frmPlayer = new frmPlayer(frmRanking, username);
                     frmPlayer.Show();
                     //frmPlayer.Show();
@@ -133,6 +135,7 @@ namespace ProjectFifaV2
                 dbh.CloseConnectionToDB();
                 MessageHandler.ShowMessage("Wrong username and/or password.");
             }
+
         }
     }
 }

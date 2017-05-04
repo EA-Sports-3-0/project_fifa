@@ -24,7 +24,7 @@ namespace ProjectFifaV2
 
         private void btnRankingBack_Click(object sender, EventArgs e)
         {
-            Hide();
+            Close();
         }
 
         private void SetListColumnWidth()
