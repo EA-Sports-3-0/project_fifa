@@ -5,18 +5,18 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 	header('location:405.html');
 }
 
-if (isset($_GET['scoorder1'])) {
+if (isset($_POST['scoorder1'])) {
 	if (!isset($_SESSION['scoorder1'])) {
     	$_SESSION['scoorder1'] = array();
 	}
-	array_push($_SESSION['scoorder1'], $_GET['scoorder1']);
+	array_push($_SESSION['scoorder1'], $_POST['scoorder1']);
 }
 
-if (isset($_GET['scoorder2'])) {
+if (isset($_POST['scoorder2'])) {
 	if (!isset($_SESSION['scoorder2'])) {
     	$_SESSION['scoorder2'] = array();
 	}
-	array_push($_SESSION['scoorder2'], $_GET['scoorder2']);
+	array_push($_SESSION['scoorder2'], $_POST['scoorder2']);
 }
 ?>
 
@@ -46,8 +46,7 @@ if (isset($_GET['scoorder2'])) {
 	            <div class="overzicht">
 	            	<h3>Overzicht</h3>
 	                <div class="resultatenoverzicht">
-	                <!-- action still needs a send location. (line 24) -->
-	                	<form class="points" action="">
+	                	<form method="post" class="points" action="../app/resultaten_handler.php">
 		                    <div class="overzichtteam">
 		                        <div class="teamselect">
 		                            <select name="team1">
@@ -104,7 +103,7 @@ if (isset($_GET['scoorder2'])) {
 	                    </form>
 	                    <div class="scoorderselect">
                             <div class="scoorder1">
-                            	<form action="#">
+                            	<form method="post" action="#">
 		                            <select name="scoorder1">
 		                                <option value="speler1">speler 1</option>
 		                                <option value="speler2">speler 2</option>
@@ -131,7 +130,7 @@ if (isset($_GET['scoorder2'])) {
                                 </ul>
                             </div>
                             <div class="scoorder2">
-	                            <form action="#">
+	                            <form method="post" action="#">
 	                            	<input type="submit" value="Add2" class="btn btn-primary">
 	                                <select name="scoorder2">
 	                                    <option value="speler1">speler 1</option>
