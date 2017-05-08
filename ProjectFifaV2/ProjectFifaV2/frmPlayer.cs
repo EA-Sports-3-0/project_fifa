@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ProjectFifaV2
@@ -19,6 +17,7 @@ namespace ProjectFifaV2
 
         public frmPlayer(Form frm, string un)
         {
+            this.userName = un;
             this.ControlBox = false;
             frmRanking = frm;
             dbh = new DatabaseHandler();
@@ -61,18 +60,45 @@ namespace ProjectFifaV2
 
         private void btnEditPrediction_Click(object sender, EventArgs e)
         {
+            dbh.OpenConnectionToDB();
             if (!DisableEditButton())
             {
-                int userID = 1;
-                int gameID = 2;
-                int homeScore = 3;
-                int awayScore = 4;
-                dbh.OpenConnectionToDB();
-                DataTable hometable = dbh.FillDT("INSERT INTO [tblPredictions] VALUES ('1', '2', '3' , '4');");
-                dbh.CloseConnectionToDB();
+                int userID = 99;
+                int gameID = 99;
+                int homeScore = 99;
+                int awayScore = 99;
+                //query to get the UserID
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM [tblUsers] WHERE Username = @userName", dbh.GetCon()))
+                {
+                    cmd.Parameters.AddWithValue("Username", userName);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    dr.Read();
+                    userID = dr.GetInt32(0);
+                    dr.Close();
+                }
+                //query to get the GameID
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM [tblGames] WHERE GameID = @gameID", dbh.GetCon()))
+                {
+                    cmd.Parameters.AddWithValue("GameID", gameID);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    dr.Read();
+                    gameID = dr.GetInt32(0);
+                    dr.Close();
+                }
 
-                // Edit predictions
-                // Update DB
+                //query to add values into tblPredictions
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO [tblPredictions] ([User_id], [Game_id], [PredictedHomeScore], [PredictedAwayScore]) VALUES (@userID, @gameID, @homeScore, @awayScore)"))
+                {
+                    cmd.Parameters.AddWithValue("UserID", userID);
+                    cmd.Parameters.AddWithValue("GameId", gameID);
+                    cmd.Parameters.AddWithValue("HomeScore", homeScore);
+                    cmd.Parameters.AddWithValue("AwayScore", awayScore);
+                    cmd.Connection = dbh.GetCon();
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Prediction succesfully added");
+                }
+                dbh.CloseConnectionToDB();
             }
         }
 
