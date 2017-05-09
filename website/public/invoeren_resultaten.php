@@ -1,4 +1,6 @@
-<?php require("head.php"); session_start();?>
+<?php require("head.php"); 
+require("../app/database.php");
+session_start();?>
 
 <?php 
 if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
@@ -50,40 +52,28 @@ if (isset($_POST['scoorder2'])) {
 		                    <div class="overzichtteam">
 		                        <div class="teamselect">
 		                            <select name="team1">
-		                                <option value="team1">team 1</option>
-		                                <option value="team2">team 2</option>
-		                                <option value="team3">team 3</option>
-		                                <option value="team4">team 4</option>
-		                                <option value="team5">team 5</option>
-		                                <option value="team6">team 6</option>
-		                                <option value="team7">team 7</option>
-		                                <option value="team8">team 8</option>
-		                                <option value="team9">team 9</option>
-		                                <option value="team10">team 10</option>
-		                                <option value="team11">team 11</option>
-		                                <option value="team12">team 12</option>
-		                                <option value="team13">team 13</option>
-		                                <option value="team14">team 14</option>
-		                                <option value="team15">team 15</option>
-		                                <option value="team16">team 16</option>
+			                            <?php 
+			                            $sql = "SELECT * FROM `tbl_teams`";
+			                            $teamCount = mysqli_num_rows(mysqli_query($db, $sql));
+			                            for ($i=1; $i <= $teamCount; $i++) { 
+			                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = $i";
+			                            	$result = mysqli_query($db, $sql);
+			                            	$obj = mysqli_fetch_object($result);
+			                            	echo "<option value='".$obj->name."'>".$obj->name."</option>";
+			                            }
+			                            ?>
 		                            </select>
 		                            <select name="team2">
-		                                <option value="team1">team 1</option>
-		                                <option value="team2">team 2</option>
-		                                <option value="team3">team 3</option>
-		                                <option value="team4">team 4</option>
-		                                <option value="team5">team 5</option>
-		                                <option value="team6">team 6</option>
-		                                <option value="team7">team 7</option>
-		                                <option value="team8">team 8</option>
-		                                <option value="team9">team 9</option>
-		                                <option value="team10">team 10</option>
-		                                <option value="team11">team 11</option>
-		                                <option value="team12">team 12</option>
-		                                <option value="team13">team 13</option>
-		                                <option value="team14">team 14</option>
-		                                <option value="team15">team 15</option>
-		                                <option value="team16">team 16</option>
+		                                <?php 
+			                            $sql = "SELECT * FROM `tbl_teams`";
+			                            $teamCount = mysqli_num_rows(mysqli_query($db, $sql));
+			                            for ($i=1; $i <= $teamCount; $i++) { 
+			                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = $i";
+			                            	$result = mysqli_query($db, $sql);
+			                            	$obj = mysqli_fetch_object($result);
+			                            	echo "<option value='".$obj->name."'>".$obj->name."</option>";
+			                            }
+			                            ?>
 		                            </select>
 		                        </div>
 		                        <div class="aantalgoals">
