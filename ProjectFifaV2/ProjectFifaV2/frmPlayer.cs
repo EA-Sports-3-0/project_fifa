@@ -64,7 +64,7 @@ namespace ProjectFifaV2
             if (!DisableEditButton())
             {
                 int userID = 99;
-                int gameID = 99;
+                int gameID = 2;
                 int homeScore = 99;
                 int awayScore = 99;
                 //query to get the UserID
@@ -77,13 +77,18 @@ namespace ProjectFifaV2
                     dr.Close();
                 }
                 //query to get the GameID
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM [tblGames] WHERE GameID = @gameID", dbh.GetCon()))
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM [tblGames] WHERE Game_ID = @gameID", dbh.GetCon()))
                 {
                     cmd.Parameters.AddWithValue("GameID", gameID);
                     SqlDataReader dr = cmd.ExecuteReader();
                     dr.Read();
                     gameID = dr.GetInt32(0);
                     dr.Close();
+                }
+                for (int i = 0; i < gameID; i = i+2)
+                {
+                    int.TryParse(txtBoxList[i].Text, out homeScore);
+                    int.TryParse(txtBoxList[i+1].Text, out awayScore);
                 }
 
                 //query to add values into tblPredictions
@@ -153,7 +158,7 @@ namespace ProjectFifaV2
             DataTable awayTable = dbh.FillDT("SELECT tblTeams.TeamName FROM tblGames INNER JOIN tblTeams ON tblGames.AwayTeam = tblTeams.Team_ID");
 
             dbh.CloseConnectionToDB();
-
+            txtBoxList = new List<TextBox>();
             for (int i = 0; i < hometable.Rows.Count; i++)
             {
                 DataRow dataRowHome = hometable.Rows[i];
@@ -163,6 +168,9 @@ namespace ProjectFifaV2
                 Label lblAwayTeam = new Label();
                 TextBox txtHomePred = new TextBox();
                 TextBox txtAwayPred = new TextBox();
+
+                txtBoxList.Add(txtHomePred);
+                txtBoxList.Add(txtAwayPred);
 
                 lblHomeTeam.TextAlign = ContentAlignment.BottomRight;
                 lblHomeTeam.Text = dataRowHome["TeamName"].ToString();
