@@ -51,8 +51,10 @@ if (isset($_POST['scoorder2'])) {
 	                	<form method="post" class="points" action="../app/resultaten_handler.php">
 		                    <div class="overzichtteam">
 		                        <div class="teamselect">
-		                            <select name="team1">
-			                            <?php 
+		                            <select name="team1" id="team1">
+		                            	<?php 
+		                            	echo '<option>Select Team.</option>';
+			                            
 			                            $sql = "SELECT * FROM `tbl_teams`";
 			                            $teamCount = mysqli_num_rows(mysqli_query($db, $sql));
 			                            for ($i=1; $i <= $teamCount; $i++) { 
@@ -63,8 +65,10 @@ if (isset($_POST['scoorder2'])) {
 			                            }
 			                            ?>
 		                            </select>
-		                            <select name="team2">
-		                                <?php 
+		                            <select name="team2" id="team2"">
+		                            	<?php 
+		                            	echo '<option>Select Team.</option>';
+			                            
 			                            $sql = "SELECT * FROM `tbl_teams`";
 			                            $teamCount = mysqli_num_rows(mysqli_query($db, $sql));
 			                            for ($i=1; $i <= $teamCount; $i++) { 
@@ -95,18 +99,23 @@ if (isset($_POST['scoorder2'])) {
                             <div class="scoorder1">
                             	<form method="post" action="#">
 		                            <select name="scoorder1">
-		                                <option value="speler1">speler 1</option>
-		                                <option value="speler2">speler 2</option>
-		                                <option value="speler3">speler 3</option>
-		                                <option value="speler4">speler 4</option>
-		                                <option value="speler5">speler 5</option>
-		                                <option value="speler6">speler 6</option>
-		                                <option value="speler7">speler 7</option>
-		                                <option value="speler8">speler 8</option>
-		                                <option value="speler9">speler 9</option>
-		                                <option value="speler10">speler 10</option>
+
+										<?php 
+										echo '<option>Select scoorder.</option>';
+
+										$sql = "SELECT * FROM `tbl_players`";
+			                            $playerCount = mysqli_num_rows(mysqli_query($db, $sql));
+										for ($i=1; $i <= $playerCount; $i++) { 
+											$sql = "SELECT `first_name`, `last_name` FROM `tbl_players` WHERE `id` = $i";
+											$result = mysqli_query($db, $sql);
+			                            	$obj = mysqli_fetch_object($result);
+			                            	$players = $obj;
+			                            	echo "<option value='".$obj->first_name." ".$obj->last_name."'>".$obj->first_name." ".$obj->last_name."</option>";
+		                            	}
+										?>
+
 		                            </select>
-		                            <input type="submit" value="Add1" class="btn btn-primary">
+		                            <input type="submit" value="Add" class="btn btn-primary">
                                 </form>
                                 <ul>
                                 	<?php 
@@ -121,18 +130,23 @@ if (isset($_POST['scoorder2'])) {
                             </div>
                             <div class="scoorder2">
 	                            <form method="post" action="#">
-	                            	<input type="submit" value="Add2" class="btn btn-primary">
+	                            	<input type="submit" value="Add" class="btn btn-primary">
 	                                <select name="scoorder2">
-	                                    <option value="speler1">speler 1</option>
-		                                <option value="speler2">speler 2</option>
-		                                <option value="speler3">speler 3</option>
-		                                <option value="speler4">speler 4</option>
-		                                <option value="speler5">speler 5</option>
-		                                <option value="speler6">speler 6</option>
-		                                <option value="speler7">speler 7</option>
-		                                <option value="speler8">speler 8</option>
-		                                <option value="speler9">speler 9</option>
-		                                <option value="speler10">speler 10</option>
+	                                    
+										<?php 
+										echo '<option>Select scoorder.</option>';
+
+										$sql = "SELECT * FROM `tbl_players`";
+			                            $playerCount = mysqli_num_rows(mysqli_query($db, $sql));
+										for ($i=1; $i <= $playerCount; $i++) { 
+											$sql = "SELECT `first_name`, `last_name` FROM `tbl_players` WHERE `id` = $i";
+											$result = mysqli_query($db, $sql);
+			                            	$obj = mysqli_fetch_object($result);
+			                            	$players = $obj;
+			                            	echo "<option value='".$obj->first_name." ".$obj->last_name."'>".$obj->first_name." ".$obj->last_name."</option>";
+		                            	}
+										?>
+
 		                            </select>
                                 </form>
                                 <ul>
@@ -152,43 +166,42 @@ if (isset($_POST['scoorder2'])) {
 	            <div class="tijdschema">
 	                <h3>Tijdschema</h3>
 	                <div class="content">
-	                <!-- the table's need to be redone in php to make then chance depending on the teams. (line 115-216) -->
 		                <table width="90%">
 		                    <tr>
 		                        <th>Team</th>
 		                        <th>Team</th>
 		                        <th>Tijd</th>
 		                    </tr>
-		                    <tr>
-		                        <th>Team 1</th>
-		                        <th>Team 2</th>
-		                        <th>10:00</th>
-		                    </tr>
-		                    <tr>
-		                        <th>Team 1</th>
-		                        <th>Team 2</th>
-		                        <th>10:00</th>
-		                    </tr>
-		                    <tr>
-		                        <th>Team 1</th>
-		                        <th>Team 2</th>
-		                        <th>10:00</th>
-		                    </tr>
-		                    <tr>
-		                        <th>Team 1</th>
-		                        <th>Team 2</th>
-		                        <th>10:00</th>
-		                    </tr>
-		                    <tr>
-		                        <th>Team 1</th>
-		                        <th>Team 2</th>
-		                        <th>10:00</th>
-		                    </tr>
-		                    <tr>
-		                        <th>Team 1</th>
-		                        <th>Team 2</th>
-		                        <th>10:00</th>
-		                    </tr>
+		                    <?php 
+
+		                    $sql = "SELECT * FROM `tbl_matches`";
+                            $matchCount = mysqli_num_rows(mysqli_query($db, $sql));
+                            $id = 0;
+                            for ($i=0; $i < $matchCount; $i++) { 
+
+                            	$sql = "SELECT * FROM `tbl_matches` WHERE `id` > '$id'";
+                            	$result = mysqli_query($db, $sql);
+                            	$base = mysqli_fetch_object($result);
+                            	$id = $base->id;
+
+                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base->team_id_a."'";
+                            	$result = mysqli_query($db, $sql);
+                            	$row = mysqli_fetch_object($result);
+                            	$team1 = $row->name;
+
+                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base->team_id_b."'";
+                            	$result = mysqli_query($db, $sql);
+                            	$row = mysqli_fetch_object($result);
+                            	$team2 = $row->name;
+
+                            	echo "
+                            	<tr>
+                            		<th>$team1</th>
+                            		<th>$team2</th>
+                            		<th>$base->start_time</th>
+                            	</tr>";
+                            }
+		                    ?>
 		                </table>
 		            </div>
 	            </div>
@@ -271,4 +284,4 @@ if (isset($_POST['scoorder2'])) {
 		</div>
     </div>
 
-<?php require("foot.php");
+<?php require("foot.php"); ?>
