@@ -72,7 +72,16 @@ namespace ProjectFifaV2
             if (!(txtPath.Text == null))
             {
                 dbh.OpenConnectionToDB();
-
+                DialogResult result = MessageBox.Show("Are you sure you want to clear the database and add new data?", "Clear database", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (result.Equals(DialogResult.OK))
+                {
+                    DataTable hometable = dbh.FillDT("DELETE FROM [tblGames];");
+                    dbh.FillDT("DELETE FROM [tblPlayers];");
+                    dbh.FillDT("DELETE FROM [tblPredictions];");
+                    dbh.FillDT("DELETE FROM [tblTeams];");
+                    // Clear database
+                    // Update DB
+                }
                 dbh.CloseConnectionToDB();
             }
             else
