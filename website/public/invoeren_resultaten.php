@@ -378,7 +378,6 @@ if (isset($_POST['scoorder2'])) {
 			            </table>
 		            </div>
 		        </div>
-		        <!-- the topscoorder needs to chance depending on the current points (line 220-225) -->
 		        <div class="topscoorder">
 		        	<?php 
 

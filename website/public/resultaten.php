@@ -1,4 +1,6 @@
-<?php require("head.php"); session_start();?>
+<?php require("head.php"); 
+require("../app/database.php");
+session_start();?>
 
     <div class="container">
 		<div class="page-header">
@@ -31,52 +33,85 @@
 		        <div class="tijdschema" id="resultaten">
 	                <h3>Tijdschema</h3>
 	                <div class="content">
-	                <!-- the table's need to be redone in php to make then chance depending on the teams. (line 32-143) -->
 		                <table width="90%">
 		                    <tr>
 		                        <th>Team</th>
 		                        <th>Team</th>
 		                        <th>Tijd</th>
 		                    </tr>
-		                    <tr>
-		                        <th>Team 1</th>
-		                        <th>Team 2</th>
-		                        <th>10:00</th>
-		                    </tr>
-		                    <tr>
-		                        <th>Team 1</th>
-		                        <th>Team 2</th>
-		                        <th>10:00</th>
-		                    </tr>
-		                    <tr>
-		                        <th>Team 1</th>
-		                        <th>Team 2</th>
-		                        <th>10:00</th>
-		                    </tr>
-		                    <tr>
-		                        <th>Team 1</th>
-		                        <th>Team 2</th>
-		                        <th>10:00</th>
-		                    </tr>
-		                    <tr>
-		                        <th>Team 1</th>
-		                        <th>Team 2</th>
-		                        <th>10:00</th>
-		                    </tr>
-		                    <tr>
-		                        <th>Team 1</th>
-		                        <th>Team 2</th>
-		                        <th>10:00</th>
-		                    </tr>
+		                    <?php 
+
+		                    $sql = "SELECT * FROM `tbl_matches`";
+                            $matchCount = mysqli_num_rows(mysqli_query($db, $sql));
+                            $id = 0;
+                            for ($i=0; $i < $matchCount; $i++) { 
+
+                            	$sql = "SELECT * FROM `tbl_matches` WHERE `id` > '$id'";
+                            	$result = mysqli_query($db, $sql);
+                            	$base = mysqli_fetch_object($result);
+                            	$id = $base->id;
+
+                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base->team_id_a."'";
+                            	$result = mysqli_query($db, $sql);
+                            	$row = mysqli_fetch_object($result);
+                            	$team1 = $row->name;
+
+                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base->team_id_b."'";
+                            	$result = mysqli_query($db, $sql);
+                            	$row = mysqli_fetch_object($result);
+                            	$team2 = $row->name;
+
+                            	echo "
+                            	<tr>
+                            		<th>$team1</th>
+                            		<th>$team2</th>
+                            		<th>$base->start_time</th>
+                            	</tr>";
+                            }
+		                    ?>
 		                </table>
 		            </div>
 	            </div>
 	            <!-- the topscoorder needs to chance depending on the current points (line 72-77) -->
 			    <div class="topscoorder">
-		            <h3><b>Topscoorder</b></h3>
-		            <h2>Team 3</h2>
-		            <h3><b>Aantal goals</b></h3>
-		            <h2>6</h2>
+		            <?php 
+
+		        	$sql = "SELECT * FROM `tbl_players`";
+                    $matchCount = mysqli_num_rows(mysqli_query($db, $sql));
+                    $id = 0;
+                    $pouls = array();
+                    for ($i=0; $i < $matchCount; $i++) { 
+                    	$sql = "SELECT * FROM `tbl_players` WHERE `id` > '$id'";
+                    	$result = mysqli_query($db, $sql);
+                    	$row = mysqli_fetch_object($result);
+                    	$goals = $row->goals;
+                    	$name = "$row->first_name $row->last_name";
+                    	$id = $row->id;
+
+                    	if (isset($poule["$name"])) {
+	                		$poule["$name"] = $goals + $poule["$name"];
+	                	}
+	                	else{
+	                		$poule["$name"] = $goals;
+	                	}
+                    }
+					if (!empty($poule)) {
+                    	arsort($poule);
+
+                    	$name = key($poule);
+                    	$goals = array_shift($poule);
+                    	
+                    	echo "
+                    	<h3><b>Topscoorder</b></h3>
+			            <h2>$name</h2>
+			            <h3><b>Aantal goals</b></h3>
+			            <h2>$goals</h2>
+						";
+                    }
+
+                    unset($poule);
+
+		        	?>
 		        </div>
 	        </div>
 		    <div class="container" id="poulestanden">
@@ -91,26 +126,80 @@
 			                    <th>Team</th>
 			                    <th>Score</th>
 			                </tr>
-			                <tr>
-			                    <th>Team 1</th>
-			                    <th>3</th>
-			                </tr>
-			                <tr>
-			                    <th>Team 1</th>
-			                    <th>3</th>
-			                </tr>
-			                <tr>
-			                    <th>Team 1</th>
-			                    <th>3</th>
-			                </tr>
-			                <tr>
-			                    <th>Team 1</th>
-			                    <th>3</th>
-			                </tr>
-			                <tr>
-			                    <th>Team 1</th>
-			                    <th>3</th>
-			                </tr>
+			                <?php 	
+
+			                $sql = "SELECT * FROM `tbl_matches` WHERE `poule_id` = 1";
+                            $matchCount = mysqli_num_rows(mysqli_query($db, $sql));
+                            $id = 0;
+                            $pouls = array();
+                            for ($i=0; $i < $matchCount; $i++) { 
+
+                            	// get the match
+                            	$sql = "SELECT * FROM `tbl_matches` WHERE `id` > '$id' AND `poule_id` = 1";
+                            	$result = mysqli_query($db, $sql);
+                            	$base = mysqli_fetch_object($result);
+                            	$id = $base->id;
+
+                            	// get team1
+                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base->team_id_a."'";
+                            	$result = mysqli_query($db, $sql);
+                            	$row = mysqli_fetch_object($result);
+                            	$team1 = $row->name;
+
+                            	// get team2
+                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base->team_id_b."'";
+                            	$result = mysqli_query($db, $sql);
+                            	$row = mysqli_fetch_object($result);
+                            	$team2 = $row->name;
+
+                            	// get score team 1
+                            	$sTeam1 = $base->score_team_a;
+
+                            	// get score team 2
+                            	$sTeam2 = $base->score_team_b;
+
+                            	if ($sTeam1 > $sTeam2) {
+                            		$scTeam1 = 2;
+                            		$scTeam2 = 0;
+                            	}
+                            	elseif ($sTeam1 < $sTeam2) {
+                            		$scTeam1 = 0;
+                            		$scTeam2 = 2;
+                            	}
+                            	else{
+                            		$scTeam1 = 1;
+                            		$scTeam2 = 1;
+                            	}
+
+                            	if (isset($poule["$team1"])) {
+                            		$poule["$team1"] = $scTeam1 + $poule["$team1"];
+                            	}
+                            	else{
+                            		$poule["$team1"] = $scTeam1;
+                            	}
+                            	if (isset($poule["$team2"])) {
+                            		$poule["$team2"] = $scTeam2 + $poule["$team2"];
+                            	}
+                            	else{
+                            		$poule["$team2"] = $scTeam2;
+                            	}
+                            }
+                            if (!empty($poule)) {
+                            	arsort($poule);
+
+	                            foreach ($poule as $key => $points) {
+	                            	echo "
+	                            	<tr>
+				                    	<th>$key</th>
+				                    	<th>$points</th>
+				                	</tr>
+									";
+	                            }
+                            }
+                            
+                            unset($poule);
+
+			                ?>
 			            </table>
 		            </div>
 		            <h3>poule B</h3>
@@ -120,26 +209,80 @@
 			                    <th>Team</th>
 			                    <th>Score</th>
 			                </tr>
-			                <tr>
-			                    <th>Team 1</th>
-			                    <th>3</th>
-			                </tr>
-			                <tr>
-			                    <th>Team 1</th>
-			                    <th>3</th>
-			                </tr>
-			                <tr>
-			                    <th>Team 1</th>
-			                    <th>3</th>
-			                </tr>
-			                <tr>
-			                    <th>Team 1</th>
-			                    <th>3</th>
-			                </tr>
-			                <tr>
-			                    <th>Team 1</th>
-			                    <th>3</th>
-			                </tr>
+			                <?php 	
+
+			                $sql = "SELECT * FROM `tbl_matches` WHERE `poule_id` = 2";
+                            $matchCount = mysqli_num_rows(mysqli_query($db, $sql));
+                            $id = 0;
+                            $pouls = array();
+                            for ($i=0; $i < $matchCount; $i++) { 
+
+                            	// get the match
+                            	$sql = "SELECT * FROM `tbl_matches` WHERE `id` > '$id' AND `poule_id` = 2";
+                            	$result = mysqli_query($db, $sql);
+                            	$base = mysqli_fetch_object($result);
+                            	$id = $base->id;
+
+                            	// get team1
+                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base->team_id_a."'";
+                            	$result = mysqli_query($db, $sql);
+                            	$row = mysqli_fetch_object($result);
+                            	$team1 = $row->name;
+
+                            	// get team2
+                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base->team_id_b."'";
+                            	$result = mysqli_query($db, $sql);
+                            	$row = mysqli_fetch_object($result);
+                            	$team2 = $row->name;
+
+                            	// get score team 1
+                            	$sTeam1 = $base->score_team_a;
+
+                            	// get score team 2
+                            	$sTeam2 = $base->score_team_b;
+
+                            	if ($sTeam1 > $sTeam2) {
+                            		$scTeam1 = 2;
+                            		$scTeam2 = 0;
+                            	}
+                            	elseif ($sTeam1 < $sTeam2) {
+                            		$scTeam1 = 0;
+                            		$scTeam2 = 2;
+                            	}
+                            	else{
+                            		$scTeam1 = 1;
+                            		$scTeam2 = 1;
+                            	}
+
+                            	if (isset($poule["$team1"])) {
+                            		$poule["$team1"] = $scTeam1 + $poule["$team1"];
+                            	}
+                            	else{
+                            		$poule["$team1"] = $scTeam1;
+                            	}
+                            	if (isset($poule["$team2"])) {
+                            		$poule["$team2"] = $scTeam2 + $poule["$team2"];
+                            	}
+                            	else{
+                            		$poule["$team2"] = $scTeam2;
+                            	}
+                            }
+                            if (!empty($poule)) {
+                            	arsort($poule);
+
+	                            foreach ($poule as $key => $points) {
+	                            	echo "
+	                            	<tr>
+				                    	<th>$key</th>
+				                    	<th>$points</th>
+				                	</tr>
+									";
+	                            }
+                            }
+                            
+                            unset($poule);
+
+			                ?>
 			            </table>
 		            </div>
 		        </div>
