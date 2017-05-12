@@ -317,6 +317,82 @@ table, th, td {
 
 /*********** invoeren_resultaten.php *****************/
 
+#teaminvoer{
+    width: 100%;
+    display: flex;
+    justify-content:space-around;
+    padding: 6% 0;
+    margin-bottom:1%;
+}
+.teamnaam{
+    width: 200px;
+}
+.teamnaam ul li{
+    list-style-type: none;
+}
+.spelerinvoer{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-direction:column;
+}
+.spelerinvoer select{
+    margin:2% 0;
+}
+#teaminvoer form{
+    margin:1% 0;
+}
+.invoerbutton, .invoerbutton button{
+    width: 200px;
+}
+.invoerbutton button{
+    margin:1% 0;
+}
+form#teaminvoer{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-around;
+    padding: 6% 70px;
+}
+form#teaminvoer .playername{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    margin-bottom: 5px;
+}
+.teamnaam ul{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+.form-contole{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+}
+.teamlist-item{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+
+}
+
+
 
 
 
