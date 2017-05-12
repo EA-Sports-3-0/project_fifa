@@ -12,6 +12,7 @@ namespace ProjectFifaV2
         private Form frmRanking;
         private DatabaseHandler dbh;
         private string userName;
+        private int userID;
 
         List<TextBox> txtBoxList;
 
@@ -21,12 +22,22 @@ namespace ProjectFifaV2
             this.ControlBox = false;
             frmRanking = frm;
             dbh = new DatabaseHandler();
-
+            dbh.OpenConnectionToDB();
+            using(SqlCommand cmd = new SqlCommand("SELECT * FROM [tblUsers] WHERE Username = @username", dbh.GetCon()))
+            {
+                cmd.Parameters.AddWithValue("Username", userName);
+                SqlDataReader dr = cmd.ExecuteReader();
+                dr.Read();
+                this.userID = dr.GetInt32(0);
+                dr.Close();
+            }
+            dbh.CloseConnectionToDB();
             InitializeComponent();
             if (DisableEditButton())
             {
                 btnEditPrediction.Enabled = false;
             }
+
             ShowResults();
             ShowScoreCard();
             this.Text = "Welcome " + un;
@@ -47,15 +58,19 @@ namespace ProjectFifaV2
 
         private void btnClearPrediction_Click(object sender, EventArgs e)
         {
+            int userID = this.userID;
             DialogResult result = MessageBox.Show("Are you sure you want to clear your prediction?", "Clear Predictions", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-            if (result.Equals(DialogResult.OK))
-            {
-                dbh.OpenConnectionToDB();
-                DataTable hometable = dbh.FillDT("DELETE FROM [tblPredictions];");
-                dbh.CloseConnectionToDB();
-                // Clear predictions
-                // Update DB
-            } 
+                if (result.Equals(DialogResult.OK))
+                {
+                    using (SqlCommand cmd = new SqlCommand("DELETE FROM tblPredictions WHERE User_ID = @userID;", dbh.GetCon()))
+                    {
+                    cmd.Parameters.AddWithValue("UserID", userID);
+                    dbh.OpenConnectionToDB();
+                        cmd.ExecuteNonQuery();
+                    dbh.CloseConnectionToDB();
+                    MessageBox.Show("Your predictions have been removed");
+                    }
+                }
         }
 
         private void btnEditPrediction_Click(object sender, EventArgs e)
@@ -63,20 +78,10 @@ namespace ProjectFifaV2
             dbh.OpenConnectionToDB();
             if (!DisableEditButton())
             {
-                int userID = 99;
-                int gameID = 0;
+                int gameID = 99;
                 int homeScore = 99;
                 int awayScore = 99;
                 int matches = 0;
-                //query to get the UserID
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM [tblUsers] WHERE Username = @userName", dbh.GetCon()))
-                {
-                    cmd.Parameters.AddWithValue("Username", userName);
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    dr.Read();
-                    userID = dr.GetInt32(0);
-                    dr.Close();
-                }
                 //query to get the GameID
                 using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM [tblGames]", dbh.GetCon()))
                 {
