@@ -1,5 +1,6 @@
 <?php 
 require("database.php");
+session_start();
 
 $ready = true;
 if (!isset($_POST['submit'])) {
@@ -9,6 +10,8 @@ if (!isset($_POST['submit'])) {
 if (!isset($_POST['teamname'])) {
 	$ready = false;
 }
+
+// inset team name without players.
 
 $poule = 1;
 if ($ready == true) {
@@ -30,13 +33,29 @@ if ($ready == true) {
     	else{
     		$check["$name"] = '1';
     	}
+
+    	if ($obj->name == $_SESSION['selectTeam']) {
+    		$ready = false;
+    	}
+
 	}
-	if ($ready = true) {
+	if ($ready == true) {
+		echo "true";
 		$sql = "INSERT INTO `tbl_teams` (`poule_id`, `name`) VALUES ('".$poule."', '".$_POST['teamname']."')";
 		mysqli_query($db, $sql);
 		header("location:../public/invoeren_TS.php");
 	}
+
+	if ($ready == false) {
+		echo "false";
+		$sql = "UPDATE `tbl_teams` SET `poule_id` = '".$poule."', `name` = '".$_POST['teamname']."' WHERE `name` = '".$_SESSION['selectTeam']."'";
+		mysqli_query($db, $sql);
+		$_SESSION['selectTeam'] = $_POST['teamname'];
+		header("location:../public/invoeren_TS.php");
+	}
 }
+
+
 
 $id = 0;
 $sql = "SELECT * FROM `tbl_teams`";
@@ -47,11 +66,23 @@ for ($i=1; $i <= $teamCount; $i++) {
 	$obj = mysqli_fetch_object($result);
 	$id = $obj->id;
 
+	// delete team from database.
 	if (isset($_POST[$obj->name]) && $_POST[$obj->name] == 'X') {
 		echo $obj->name;
 
 		$sql = "DELETE FROM `tbl_teams` WHERE `name` = '".$obj->name."'";
 		mysqli_query($db, $sql);
+		unset($_SESSION['selectTeam']);
+		header("location:../public/invoeren_TS.php");
+	}
+
+	if (isset($_POST[$obj->name]) && $_POST[$obj->name] == $obj->name) {
+		$_SESSION['selectTeam'] = $obj->name;
+		header("location:../public/invoeren_TS.php");
+	}
+
+	if (isset($_POST['createNew'])) {
+		unset($_SESSION['selectTeam']);
 		header("location:../public/invoeren_TS.php");
 	}
 }
