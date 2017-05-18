@@ -56,12 +56,12 @@ if (isset($_POST['scoorder2'])) {
 		                            	echo '<option>Select Team.</option>';
 			                            
 			                            $sql = "SELECT * FROM `tbl_teams`";
-			                            $teamCount = mysqli_num_rows(mysqli_query($db, $sql));
+			                            $teamCount = $db->query($sql)->rowCount();
 			                            for ($i=1; $i <= $teamCount; $i++) { 
 			                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = $i";
-			                            	$result = mysqli_query($db, $sql);
-			                            	$obj = mysqli_fetch_object($result);
-			                            	echo "<option value='".$obj->name."'>".$obj->name."</option>";
+			                            	$result = $db->query($sql);
+			                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
+			                            	echo "<option value='".$obj['name']."'>".$obj['name']."</option>";
 			                            }
 			                            ?>
 		                            </select>
@@ -70,12 +70,12 @@ if (isset($_POST['scoorder2'])) {
 		                            	echo '<option>Select Team.</option>';
 			                            
 			                            $sql = "SELECT * FROM `tbl_teams`";
-			                            $teamCount = mysqli_num_rows(mysqli_query($db, $sql));
+			                            $teamCount = $db->query($sql)->rowCount();
 			                            for ($i=1; $i <= $teamCount; $i++) { 
 			                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = $i";
-			                            	$result = mysqli_query($db, $sql);
-			                            	$obj = mysqli_fetch_object($result);
-			                            	echo "<option value='".$obj->name."'>".$obj->name."</option>";
+			                            	$result = $db->query($sql);
+			                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
+			                            	echo "<option value='".$obj['name']."'>".$obj['name']."</option>";
 			                            }
 			                            ?>
 		                            </select>
@@ -104,13 +104,13 @@ if (isset($_POST['scoorder2'])) {
 										echo '<option>Select scoorder.</option>';
 
 										$sql = "SELECT * FROM `tbl_players`";
-			                            $playerCount = mysqli_num_rows(mysqli_query($db, $sql));
+			                            $playerCount = $db->query($sql)->rowCount();
 										for ($i=1; $i <= $playerCount; $i++) { 
 											$sql = "SELECT `first_name`, `last_name` FROM `tbl_players` WHERE `id` = $i";
-											$result = mysqli_query($db, $sql);
-			                            	$obj = mysqli_fetch_object($result);
+											$result = $db->query($sql);
+			                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
 			                            	$players = $obj;
-			                            	echo "<option value='".$obj->first_name." ".$obj->last_name."'>".$obj->first_name." ".$obj->last_name."</option>";
+			                            	echo "<option value='".$obj['first_name']." ".$obj['last_name']."'>".$obj['first_name']." ".$obj['last_name']."</option>";
 		                            	}
 										?>
 
@@ -137,13 +137,13 @@ if (isset($_POST['scoorder2'])) {
 										echo '<option>Select scoorder.</option>';
 
 										$sql = "SELECT * FROM `tbl_players`";
-			                            $playerCount = mysqli_num_rows(mysqli_query($db, $sql));
+			                            $playerCount = $db->query($sql)->rowCount();
 										for ($i=1; $i <= $playerCount; $i++) { 
 											$sql = "SELECT `first_name`, `last_name` FROM `tbl_players` WHERE `id` = $i";
-											$result = mysqli_query($db, $sql);
-			                            	$obj = mysqli_fetch_object($result);
+											$result = $db->query($sql);
+			                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
 			                            	$players = $obj;
-			                            	echo "<option value='".$obj->first_name." ".$obj->last_name."'>".$obj->first_name." ".$obj->last_name."</option>";
+			                            	echo "<option value='".$obj['first_name']." ".$obj['last_name']."'>".$obj['first_name']." ".$obj['last_name']."</option>";
 		                            	}
 										?>
 
@@ -175,30 +175,30 @@ if (isset($_POST['scoorder2'])) {
 		                    <?php 
 
 		                    $sql = "SELECT * FROM `tbl_matches`";
-                            $matchCount = mysqli_num_rows(mysqli_query($db, $sql));
+                            $matchCount = $db->query($sql)->rowCount();
                             $id = 0;
                             for ($i=0; $i < $matchCount; $i++) { 
 
                             	$sql = "SELECT * FROM `tbl_matches` WHERE `id` > '$id'";
-                            	$result = mysqli_query($db, $sql);
-                            	$base = mysqli_fetch_object($result);
-                            	$id = $base->id;
+                            	$result = $db->query($sql);
+                            	$base = $result->fetch(PDO::FETCH_ASSOC);
+                            	$id = $base['id'];
 
-                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base->team_id_a."'";
-                            	$result = mysqli_query($db, $sql);
-                            	$row = mysqli_fetch_object($result);
-                            	$team1 = $row->name;
+                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_a']."'";
+                            	$result = $db->query($sql);
+                            	$row = $result->fetch(PDO::FETCH_ASSOC);
+                            	$team1 = $row['name'];
 
-                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base->team_id_b."'";
-                            	$result = mysqli_query($db, $sql);
-                            	$row = mysqli_fetch_object($result);
-                            	$team2 = $row->name;
+                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_b']."'";
+                            	$result = $db->query($sql);
+                            	$row = $result->fetch(PDO::FETCH_ASSOC);
+                            	$team2 = $row['name'];
 
                             	echo "
                             	<tr>
                             		<th>$team1</th>
                             		<th>$team2</th>
-                            		<th>$base->start_time</th>
+                            		<th>".$base['start_time']."</th>
                             	</tr>";
                             }
 		                    ?>
@@ -221,34 +221,33 @@ if (isset($_POST['scoorder2'])) {
 			                <?php 	
 
 			                $sql = "SELECT * FROM `tbl_matches` WHERE `poule_id` = 1";
-                            $matchCount = mysqli_num_rows(mysqli_query($db, $sql));
+                            $matchCount = $db->query($sql)->rowCount();
                             $id = 0;
                             $pouls = array();
                             for ($i=0; $i < $matchCount; $i++) { 
 
                             	// get the match
                             	$sql = "SELECT * FROM `tbl_matches` WHERE `id` > '$id' AND `poule_id` = 1";
-                            	$result = mysqli_query($db, $sql);
-                            	$base = mysqli_fetch_object($result);
-                            	$id = $base->id;
+                            	$result = $db->query($sql);
+                            	$base = $result->fetch(PDO::FETCH_ASSOC);
+                            	$id = $base['id'];
 
                             	// get team1
-                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base->team_id_a."'";
-                            	$result = mysqli_query($db, $sql);
-                            	$row = mysqli_fetch_object($result);
-                            	$team1 = $row->name;
+                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_a']."'";
+                            	$result = $db->query($sql);
+                            	$row = $result->fetch(PDO::FETCH_ASSOC);
+                            	$team1 = $row['name'];
 
-                            	// get team2
-                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base->team_id_b."'";
-                            	$result = mysqli_query($db, $sql);
-                            	$row = mysqli_fetch_object($result);
-                            	$team2 = $row->name;
+                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_b']."'";
+                            	$result = $db->query($sql);
+                            	$row = $result->fetch(PDO::FETCH_ASSOC);
+                            	$team2 = $row['name'];
 
                             	// get score team 1
-                            	$sTeam1 = $base->score_team_a;
+                            	$sTeam1 = $base['score_team_a'];
 
                             	// get score team 2
-                            	$sTeam2 = $base->score_team_b;
+                            	$sTeam2 = $base['score_team_b'];
 
                             	if ($sTeam1 > $sTeam2) {
                             		$scTeam1 = 2;
@@ -304,34 +303,32 @@ if (isset($_POST['scoorder2'])) {
 			                <?php 	
 
 			                $sql = "SELECT * FROM `tbl_matches` WHERE `poule_id` = 2";
-                            $matchCount = mysqli_num_rows(mysqli_query($db, $sql));
+                            $matchCount = $db->query($sql)->rowCount();
                             $id = 0;
                             $pouls = array();
                             for ($i=0; $i < $matchCount; $i++) { 
 
                             	// get the match
                             	$sql = "SELECT * FROM `tbl_matches` WHERE `id` > '$id' AND `poule_id` = 2";
-                            	$result = mysqli_query($db, $sql);
-                            	$base = mysqli_fetch_object($result);
-                            	$id = $base->id;
+                            	$result = $db->query($sql);
+                            	$base = $result->fetch(PDO::FETCH_ASSOC);
+                            	$id = $base['id'];
 
-                            	// get team1
-                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base->team_id_a."'";
-                            	$result = mysqli_query($db, $sql);
-                            	$row = mysqli_fetch_object($result);
-                            	$team1 = $row->name;
+                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_a']."'";
+                            	$result = $db->query($sql);
+                            	$row = $result->fetch(PDO::FETCH_ASSOC);
+                            	$team1 = $row['name'];
 
-                            	// get team2
-                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base->team_id_b."'";
-                            	$result = mysqli_query($db, $sql);
-                            	$row = mysqli_fetch_object($result);
-                            	$team2 = $row->name;
+                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_b']."'";
+                            	$result = $db->query($sql);
+                            	$row = $result->fetch(PDO::FETCH_ASSOC);
+                            	$team2 = $row['name'];
 
                             	// get score team 1
-                            	$sTeam1 = $base->score_team_a;
+                            	$sTeam1 = $base['score_team_a'];
 
                             	// get score team 2
-                            	$sTeam2 = $base->score_team_b;
+                            	$sTeam2 = $base['score_team_b'];
 
                             	if ($sTeam1 > $sTeam2) {
                             		$scTeam1 = 2;
@@ -382,16 +379,16 @@ if (isset($_POST['scoorder2'])) {
 		        	<?php 
 
 		        	$sql = "SELECT * FROM `tbl_players`";
-                    $matchCount = mysqli_num_rows(mysqli_query($db, $sql));
+                    $matchCount = $db->query($sql)->rowCount();
                     $id = 0;
                     $pouls = array();
                     for ($i=0; $i < $matchCount; $i++) { 
                     	$sql = "SELECT * FROM `tbl_players` WHERE `id` > '$id'";
-                    	$result = mysqli_query($db, $sql);
-                    	$row = mysqli_fetch_object($result);
-                    	$goals = $row->goals;
-                    	$name = "$row->first_name $row->last_name";
-                    	$id = $row->id;
+                    	$result = $db->query($sql);
+                    	$row = $result->fetch(PDO::FETCH_ASSOC);
+                    	$goals = $row['goals'];
+                    	$name = "".$row['first_name']." ".$row['last_name']."";
+                    	$id = $row['id'];
 
                     	if (isset($poule["$name"])) {
 	                		$poule["$name"] = $goals + $poule["$name"];

@@ -57,14 +57,14 @@ if (isset($scoorder1)) {
 	$scoorder1 = array_count_values($scoorder1);
 	foreach ($scoorder1 as $key => $points) {
 		$sql = "UPDATE `tbl_players` SET `goals` = $points WHERE `id` = $key";
-		mysqli_query($db, $sql);
+		$db->query($sql);
 	}
 }
 if (isset($scoorder2)) {
 	$scoorder1 = array_count_values($scoorder2);
 	foreach ($scoorder2 as $key => $points) {
 		$sql = "UPDATE `tbl_players` SET `goals` = $points WHERE `id` = $key";
-		mysqli_query($db, $sql);
+		$db->query($sql);
 	}
 }
 
@@ -73,16 +73,16 @@ if($ready == true)
 	// get team_id_a
 	$team1 = $_POST['team1'];
 	$sql = "SELECT `id` FROM `tbl_teams` WHERE `name` = '$team1'";
-	$result = mysqli_query($db, $sql);
-	$obj = mysqli_fetch_object($result);
-	$team1 = $obj->id;
+	$result = $db->query($sql);
+	$obj = $result->fetch(PDO::FETCH_ASSOC);
+	$team1 = $obj['id'];
 
 	// get team_id_b
 	$team2 = $_POST['team2'];
 	$sql = "SELECT `id` FROM `tbl_teams` WHERE `name` = '$team2'";
-	$result = mysqli_query($db, $sql);
-	$obj = mysqli_fetch_object($result);
-	$team2 = $obj->id;
+	$result = $db->query($sql);
+	$obj = $result->fetch(PDO::FETCH_ASSOC);
+	$team2 = $obj['id'];
 
 	// get score_team_a
 	$point1 = $_POST['point1'];
@@ -94,7 +94,7 @@ if($ready == true)
 
 	$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `score_team_a`, `score_team_b`, `start_time`) 
 	VALUES ('$team1', '$team2', '$point1', '$point2', '$date')";
-	mysqli_query($db, $sql);
+	$db->query($sql);
 
 	unset($_SESSION['scoorder1']);
 	unset($_SESSION['scoorder2']);
