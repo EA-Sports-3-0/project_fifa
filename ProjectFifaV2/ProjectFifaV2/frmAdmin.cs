@@ -15,6 +15,7 @@ namespace ProjectFifaV2
     {
         private DatabaseHandler dbh;
         private OpenFileDialog opfd;
+        private string path;
 
         DataTable table;
 
@@ -56,7 +57,7 @@ namespace ProjectFifaV2
         {
             txtPath.Text = null;
             
-            string path = GetFilePath();
+            this.path = GetFilePath();
 
             if (CheckExtension(path, "csv"))
             {
@@ -85,7 +86,7 @@ namespace ProjectFifaV2
                                             dbh.FillDT("DELETE FROM [tblPlayers];");
                                             dbh.FillDT("DELETE FROM [tblPredictions];");
                                             dbh.FillDT("DELETE FROM [tblTeams];");
-                    using (var fs = File.OpenRead(@"project_fifa.csv"))
+                    using (var fs = File.OpenRead(path))
                     using (var reader = new StreamReader(fs))
                     {
                         List<string> listA = new List<string>();
