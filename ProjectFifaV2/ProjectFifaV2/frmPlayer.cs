@@ -37,7 +37,6 @@ namespace ProjectFifaV2
             {
                 btnEditPrediction.Enabled = false;
             }
-
             ShowResults();
             ShowScoreCard();
             this.Text = "Welcome " + un;
