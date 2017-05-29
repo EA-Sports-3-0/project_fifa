@@ -49,7 +49,14 @@ namespace ProjectFifaV2
         {
             dbh.TestConnection();
             SqlDataAdapter dataAdapter = new SqlDataAdapter(selectCommandText, dbh.GetCon());
-            dataAdapter.Fill(table);
+            try
+            {
+                dataAdapter.Fill(table);
+            }
+            catch
+            {
+                MessageBox.Show("Wrong SQL querry");
+            }
             dgvAdminData.DataSource = table;
         }
 
@@ -84,7 +91,6 @@ namespace ProjectFifaV2
                 {
                     DataTable hometable =   dbh.FillDT("DELETE FROM [tblGames];");
                                             dbh.FillDT("DELETE FROM [tblPlayers];");
-                                            dbh.FillDT("DELETE FROM [tblPredictions];");
                                             dbh.FillDT("DELETE FROM [tblTeams];");
                     using (var fs = File.OpenRead(path))
                     using (var reader = new StreamReader(fs))
@@ -134,10 +140,10 @@ namespace ProjectFifaV2
                                 using (SqlCommand cmd = new SqlCommand("INSERT INTO [tblGames] ([HomeTeam], [AwayTeam], [HomeTeamScore], [AwayTeamScore]) VALUES (@HomeTeam, @AwayTeam, @HomeTeamScore, @AwayTeamScore)"))
                                 {
                                     //parameters for tblGames
-                                    cmd.Parameters.AddWithValue("HomeTeam", numbers[0]);
-                                    cmd.Parameters.AddWithValue("AwayTeam", numbers[1]);
-                                    cmd.Parameters.AddWithValue("HomeTeamScore", numbers[2]);
-                                    cmd.Parameters.AddWithValue("AwayTeamScore", numbers[3]);
+                                    cmd.Parameters.AddWithValue("HomeTeam", numbers[1]);
+                                    cmd.Parameters.AddWithValue("AwayTeam", numbers[2]);
+                                    cmd.Parameters.AddWithValue("HomeTeamScore", numbers[3]);
+                                    cmd.Parameters.AddWithValue("AwayTeamScore", numbers[4]);
                                     dbh.OpenConnectionToDB();
                                     cmd.Connection = dbh.GetCon();
                                     cmd.ExecuteNonQuery();
@@ -161,9 +167,10 @@ namespace ProjectFifaV2
                             }
                             if (i == 2 || i == 3)
                             {
-                                using (SqlCommand cmd = new SqlCommand("INSERT INTO [tblTeams] ([TeamName]) VALUES (@TeamName)"))
+                                using (SqlCommand cmd = new SqlCommand("INSERT INTO [tblTeams] ([Team_id], [TeamName]) VALUES (@TeamID, @TeamName)"))
                                 {
                                     //parameters for tblTeams
+                                    cmd.Parameters.AddWithValue("TeamID", numbers[0]);
                                     cmd.Parameters.AddWithValue("TeamName", numbers[2]);
                                     dbh.OpenConnectionToDB();
                                     cmd.Connection = dbh.GetCon();
@@ -201,8 +208,14 @@ namespace ProjectFifaV2
         {
             int extensionLength = extension.Length;
             int strLength = fileString.Length;
-
-            string ext = fileString.Substring(strLength - extensionLength, extensionLength);
+            string ext = "";
+            try
+            {
+               ext = fileString.Substring(strLength - extensionLength, extensionLength);
+            }
+            catch
+            {
+            }
 
             if (ext == extension)
             {
