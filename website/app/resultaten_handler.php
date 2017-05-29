@@ -12,6 +12,7 @@ if (!isset($_POST['team1'])) {
 	$message = "vul alles in.";
 	header("location:../public/invoeren_resultaten.php?team1=$message");
 	$ready = false;
+	echo "ready == false<br>";
 }
 else{
 	
@@ -21,6 +22,7 @@ if (!isset($_POST['team2'])) {
 	$message = "vul alles in.";
 	header("location:../public/invoeren_resultaten.php?team1=$message");
 	$ready = false;
+	echo "ready == false<br>";
 }
 else{
 
@@ -30,6 +32,7 @@ if (!isset($_POST['point1'])) {
 	$message = "vul alles in.";
 	header("location:../public/invoeren_resultaten.php?team1=$message");
 	$ready = false;
+	echo "ready == false<br>";
 }
 else{
 
@@ -39,6 +42,7 @@ if (!isset($_POST['point2'])) {
 	$message = "vul alles in.";
 	header("location:../public/invoeren_resultaten.php?team1=$message");
 	$ready = false;
+	echo "ready == false<br>";
 }
 else{
 
@@ -57,20 +61,46 @@ if (isset($scoorder1)) {
 	$scoorder1 = array_count_values($scoorder1);
 	var_dump($scoorder1);
 	foreach ($scoorder1 as $key => $points) {
-		$sql = "UPDATE `tbl_players` SET `goals` = $points WHERE `id` = $key";
-		$db->query($sql);
+		$id = 0;
+		$sql = "SELECT * FROM `tbl_players`";
+		$teamCount = $db->query($sql)->rowCount();
+		for ($i=1; $i <= $teamCount; $i++) {
+			$sql = "SELECT * FROM `tbl_players` WHERE `id` > $id";
+			$result = $db->query($sql);
+	    	$obj = $result->fetch(PDO::FETCH_ASSOC);
+			$id = $obj['id'];
+			$name = $obj['first_name']." ".$obj['last_name'];
+			if ($name == $key) {
+				$sql = "UPDATE `tbl_players` SET `goals` = $points WHERE `id` = $id";
+				$db->query($sql);
+			}
+		}
 	}
 }
 if (isset($scoorder2)) {
 	$scoorder1 = array_count_values($scoorder2);
+	var_dump($scoorder2);
 	foreach ($scoorder2 as $key => $points) {
-		$sql = "UPDATE `tbl_players` SET `goals` = $points WHERE `id` = $key";
-		$db->query($sql);
+		$id = 0;
+		$sql = "SELECT * FROM `tbl_players`";
+		$teamCount = $db->query($sql)->rowCount();
+		for ($i=1; $i <= $teamCount; $i++) {
+			$sql = "SELECT * FROM `tbl_players` WHERE `id` > $id";
+			$result = $db->query($sql);
+	    	$obj = $result->fetch(PDO::FETCH_ASSOC);
+			$id = $obj['id'];
+			$name = $obj['first_name']." ".$obj['last_name'];
+			if ($name == $key) {
+				$sql = "UPDATE `tbl_players` SET `goals` = $points WHERE `id` = $id";
+				$db->query($sql);
+			}
+		}
 	}
 }
 
 if($ready == true)
 {
+	echo "ready == true<br>";
 	// get team_id_a
 	$team1 = $_POST['team1'];
 	$sql = "SELECT `id` FROM `tbl_teams` WHERE `name` = '$team1'";
@@ -93,12 +123,13 @@ if($ready == true)
 
 	$date = date("Y-m-d H:i:s"); 
 
-	$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `score_team_a`, `score_team_b`, `start_time`) 
-	VALUES ('$team1', '$team2', '$point1', '$point2', '$date')";
+	$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `score_team_a`, `score_team_b`, `poule_id`, `start_time`) 
+	VALUES ('$team1', '$team2', '$point1', '$point2', '1', '$date')";
+	echo $sql;
 	$db->query($sql);
 
 	unset($_SESSION['scoorder1']);
 	unset($_SESSION['scoorder2']);
 }
 
-// header("location:../public/invoeren_resultaten.php");
+header("location:../public/invoeren_resultaten.php");
