@@ -53,28 +53,32 @@ if (isset($_POST['scoorder2'])) {
 		                        <div class="teamselect">
 		                            <select name="team1" id="team1">
 		                            	<?php 
-		                            	echo '<option>Select Team.</option>';
+		                            	echo '<option>Select Team</option>';
 			                            
 			                            $sql = "SELECT * FROM `tbl_teams`";
 			                            $teamCount = $db->query($sql)->rowCount();
+			                            $id = 0;
 			                            for ($i=1; $i <= $teamCount; $i++) { 
-			                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = $i";
+			                            	$sql = "SELECT `name`, `id` FROM `tbl_teams` WHERE `id` > $id";
 			                            	$result = $db->query($sql);
 			                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
+			                            	$id = $obj['id'];
 			                            	echo "<option value='".$obj['name']."'>".$obj['name']."</option>";
 			                            }
 			                            ?>
 		                            </select>
 		                            <select name="team2" id="team2"">
 		                            	<?php 
-		                            	echo '<option>Select Team.</option>';
+		                            	echo '<option>Select Team</option>';
 			                            
 			                            $sql = "SELECT * FROM `tbl_teams`";
 			                            $teamCount = $db->query($sql)->rowCount();
+			                            $id = 0;
 			                            for ($i=1; $i <= $teamCount; $i++) { 
-			                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = $i";
+			                            	$sql = "SELECT `name`, `id` FROM `tbl_teams` WHERE `id` > $id";
 			                            	$result = $db->query($sql);
 			                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
+			                            	$id = $obj['id'];
 			                            	echo "<option value='".$obj['name']."'>".$obj['name']."</option>";
 			                            }
 			                            ?>
@@ -101,16 +105,20 @@ if (isset($_POST['scoorder2'])) {
 		                            <select name="scoorder1">
 
 										<?php 
-										echo '<option>Select scoorder.</option>';
+										echo '<option>Select scoorder</option>';
 
 										$sql = "SELECT * FROM `tbl_players`";
 			                            $playerCount = $db->query($sql)->rowCount();
-										for ($i=1; $i <= $playerCount; $i++) { 
-											$sql = "SELECT `first_name`, `last_name` FROM `tbl_players` WHERE `id` = $i";
+			                            $id = 0;
+										for ($i=0; $i <= $playerCount; $i++) { 
+											$sql = "SELECT `first_name`, `last_name`, `id` FROM `tbl_players` WHERE `id` > $id";
 											$result = $db->query($sql);
 			                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
 			                            	$players = $obj;
-			                            	echo "<option value='".$obj['first_name']." ".$obj['last_name']."'>".$obj['first_name']." ".$obj['last_name']."</option>";
+			                            	$id = $obj['id'];
+			                            	if ($obj['first_name'] != "" || $obj['last_name'] != "") {
+			                            		echo "<option value='".$obj['first_name']." ".$obj['last_name']."'>".$obj['first_name']." ".$obj['last_name']."</option>";
+			                            	}
 		                            	}
 										?>
 
@@ -134,16 +142,20 @@ if (isset($_POST['scoorder2'])) {
 	                                <select name="scoorder2">
 	                                    
 										<?php 
-										echo '<option>Select scoorder.</option>';
+										echo '<option>Select scoorder</option>';
 
 										$sql = "SELECT * FROM `tbl_players`";
 			                            $playerCount = $db->query($sql)->rowCount();
-										for ($i=1; $i <= $playerCount; $i++) { 
-											$sql = "SELECT `first_name`, `last_name` FROM `tbl_players` WHERE `id` = $i";
+			                            $id = 0;
+										for ($i=0; $i <= $playerCount; $i++) { 
+											$sql = "SELECT `first_name`, `last_name`, `id` FROM `tbl_players` WHERE `id` > $id";
 											$result = $db->query($sql);
 			                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
 			                            	$players = $obj;
-			                            	echo "<option value='".$obj['first_name']." ".$obj['last_name']."'>".$obj['first_name']." ".$obj['last_name']."</option>";
+			                            	$id = $obj['id'];
+			                            	if ($obj['first_name'] != "" || $obj['last_name'] != "") {
+			                            		echo "<option value='".$obj['first_name']." ".$obj['last_name']."'>".$obj['first_name']." ".$obj['last_name']."</option>";
+			                            	}
 		                            	}
 										?>
 

@@ -55,6 +55,7 @@ if (isset($_SESSION['scoorder2'])) {
 }
 if (isset($scoorder1)) {
 	$scoorder1 = array_count_values($scoorder1);
+	var_dump($scoorder1);
 	foreach ($scoorder1 as $key => $points) {
 		$sql = "UPDATE `tbl_players` SET `goals` = $points WHERE `id` = $key";
 		$db->query($sql);
@@ -100,4 +101,4 @@ if($ready == true)
 	unset($_SESSION['scoorder2']);
 }
 
-header("location:../public/invoeren_resultaten.php");
+// header("location:../public/invoeren_resultaten.php");

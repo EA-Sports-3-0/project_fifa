@@ -61,14 +61,14 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 				<div class="teamnaam">
 		            <div class="form-group">
 		                <label for="teamname">Team naam</label>
-		                <input type="text" id="teamname" name="teamname" placeholder="team naam" class="form-control" maxlength="14" <?php 
+		                <input type="text" id="teamname" name="teamname" placeholder="team naam" class="form-control" minlength="2" maxlength="14" autocomplete="off" <?php 
 		                if (isset($team)) {
 		                	echo "value='$team'";
 		                }
 		                ?>>
-		                <input type="submit" name="createNew" value="create new team">
 		            </div>
 		            <ul>
+		            	<input type="submit" name="createNew" value="new team">
 		                <?php 
 
 		                $id = 0;
