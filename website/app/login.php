@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             password = '$mypassword'";
 
     //mysqli type query. if you cant execut it: check database.php to see if it is also set to mysqli.
-    $match = mysqli_query($db, $sql)->num_rows;
+    $match = $db->query($sql)->fetchColumn();
 
     if ($match == 1) {
 

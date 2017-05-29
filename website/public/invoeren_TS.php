@@ -33,23 +33,23 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 	        $team = $_SESSION['selectTeam'];
 
 	        $sql = "SELECT * FROM `tbl_teams` WHERE `name` = '$team'";
-	        $result = mysqli_query($db, $sql);
-			$obj = mysqli_fetch_object($result);
-			$teamid = $obj->id;
+	        $result = $db->query($sql);
+        	$obj = $result->fetch(PDO::FETCH_ASSOC);
+			$teamid = $obj['id'];
 
 	        $sql = "SELECT * FROM `tbl_players` WHERE `team_id` = $teamid";
-	        $matchCount = mysqli_num_rows(mysqli_query($db, $sql));
+	        $matchCount = $db->query($sql)->rowCount();
 	        $id = 0;
 	        $fnames = array("no.0");
 			$lnames = array("no.0");
 	        for ($i=0; $i < $matchCount; $i++) { 
 	        	$sql = "SELECT * FROM `tbl_players` WHERE `team_id` = '$teamid' AND `id` > '$id'";
-	        	$result = mysqli_query($db, $sql);
-				$obj = mysqli_fetch_object($result);
-				$id = $obj->id;
+	        	$result = $db->query($sql);
+            	$obj = $result->fetch(PDO::FETCH_ASSOC);
+				$id = $obj['id'];
 
-	        	$fname = $obj->first_name;
-	        	$lname = $obj->last_name;
+	        	$fname = $obj['first_name'];
+	        	$lname = $obj['last_name'];
 
 	    		array_push($fnames, "$fname");
 	    	                    	
@@ -61,28 +61,28 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 				<div class="teamnaam">
 		            <div class="form-group">
 		                <label for="teamname">Team naam</label>
-		                <input type="text" id="teamname" name="teamname" placeholder="team naam" class="form-control" maxlength="14" <?php 
+		                <input type="text" id="teamname" name="teamname" placeholder="team naam" class="form-control" minlength="2" maxlength="14" autocomplete="off" <?php 
 		                if (isset($team)) {
 		                	echo "value='$team'";
 		                }
 		                ?>>
-		                <input type="submit" name="createNew" value="create new team">
 		            </div>
 		            <ul>
+		            	<input type="submit" name="createNew" value="new team">
 		                <?php 
 
 		                $id = 0;
 		                $sql = "SELECT * FROM `tbl_teams`";
-                        $teamCount = mysqli_num_rows(mysqli_query($db, $sql));
+                        $teamCount = $db->query($sql)->rowCount();
                         for ($i=1; $i <= $teamCount; $i++) { 
                         	$sql = "SELECT * FROM `tbl_teams` WHERE `id` > $id";
-                        	$result = mysqli_query($db, $sql);
-                        	$obj = mysqli_fetch_object($result);
-                        	$id = $obj->id;
+                        	$result = $db->query($sql);
+            				$obj = $result->fetch(PDO::FETCH_ASSOC);
+                        	$id = $obj['id'];
                         	echo "
                         	<div class='teamlist-item'>
-	                        	<input type='submit' name='".$obj->name."' value='".$obj->name."'>
-	                        	<input type='submit' name='".$obj->name."' value='X'>
+	                        	<input type='submit' name='".$obj['name']."' value='".$obj['name']."'>
+	                        	<input type='submit' name='".$obj['name']."' value='X'>
                         	</div>";
                         }
 
