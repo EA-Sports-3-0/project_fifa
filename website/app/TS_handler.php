@@ -121,6 +121,8 @@ for ($i=1; $i <= $teamCount; $i++) {
         $sql = "UPDATE `tbl_teams` SET `set_players` = '0' WHERE `id` = '".$id."'";
         $db->query($sql);
         echo $sql."<br>";
+        $sql = "DELETE FROM `tbl_matches` WHERE `team_id_a` = '".$id."' OR `team_id_b` = '".$id."'";
+        $db->query($sql);
 		$sql = "DELETE FROM `tbl_teams` WHERE `id` = '".$id."'";
 		$db->query($sql);
         echo $sql."<br>";

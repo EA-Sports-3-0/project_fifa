@@ -17,12 +17,13 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 						if (isset($_SESSION['valid']) && $_SESSION['valid'] == true) {
 							echo '<li role="presentation"><a href="invoeren_resultaten.php">invoeren resultaten</a></li>';
 							echo '<li role="presentation" class="active"><a href="invoeren_TS.php">invoeren T&S</a></li>';
+							echo '<li role="presentation"><a href="finals_admin.php">finals</a></li>';
 						}
 						else{
 							echo '<li role="presentation"><a href="resultaten.php">resultaten</a></li>';
+							echo '<li role="presentation"><a href="finals.php">finals</a></li>';
 						}
 					?>
-					<li role="presentation"><a href="finals.php">finals</a></li>
 				</ul>
 			</div>
 			<div class="buffer"></div>

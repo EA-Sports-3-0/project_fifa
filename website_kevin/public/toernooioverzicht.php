@@ -133,81 +133,80 @@ require_once("header.php");
     <div class="pouleresultatentitel">
             <h2>Poule Resultaten</h2>
     </div>
-        <div class="container" id="pouleresultaten">
-            <div class="resultatenlinks">
-                <div class="overzichttabel">
-                    <h3>Poule A</h3>
-                    <table>
-                        <th>
-                            <tr>
-                                <td>Team</td>
-                                <td>Score</td>
-                            </tr>
-                        </th>
+    <div class="container" id="pouleresultaten">
+        <div class="resultatenlinks">
+            <div class="overzichttabel">
+                <h3>Poule A</h3>
+                <table>
+                    <th>
                         <tr>
-                            <td>1</td>
-                            <td>2</td>
+                            <td>Team</td>
+                            <td>Score</td>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="resultatenrechts">
-                <div class="overzichttabel">
-                    <h3>Poule B</h3>
-                    <table>
-                        <th>
-                            <tr>
-                                <td>Team</td>
-                                <td>Score</td>
-                            </tr>
-                        </th>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                        </tr>
-                    </table>
-                </div>
+                    </th>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                </table>
             </div>
         </div>
-</div>
+        <div class="resultatenrechts">
+            <div class="overzichttabel">
+                <h3>Poule B</h3>
+                <table>
+                    <th>
+                        <tr>
+                            <td>Team</td>
+                            <td>Score</td>
+                        </tr>
+                    </th>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>

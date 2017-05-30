@@ -390,8 +390,104 @@ form#teaminvoer .playername{
     display: -ms-flex;
     display: -o-flex;
     display: flex;
-
 }
+
+#finals #toernooilayout{
+    width: 100%;
+    text-align: center;
+}
+#finals .groepsfase{
+    display: flex;
+    justify-content:space-between;
+    margin-bottom: 3%;
+}
+#finals .kwartfinales{
+    margin-left: 5%;
+    width: 90%;
+    display: flex;
+    justify-content:space-around;
+    margin-bottom: 3%;
+}
+#finals .halvefinales{
+    display: flex;
+    justify-content:space-around;
+    margin-bottom: 3%;
+}
+#finals .finale{
+    display: flex;
+    justify-content:space-around;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+#finals .winnaar{
+    display: flex;
+    justify-content:space-around;
+    margin:3% 0 3% 0;
+}
+#finals .teams{
+    width: 40%;
+    display: flex;
+    justify-content:space-around;
+    text-align: center;
+}
+#finals .teams p{
+    margin-top: 7px;
+}
+#finals .groepen{
+    display: flex;
+    justify-content:space-around;
+    width: 20%;
+    border: 1px solid black;
+}
+#finals .wedstrijd{
+    display: flex;
+    justify-content:space-around;
+    width: 10%;
+    border:1px solid black;
+}
+#finals #poulestanden.container{
+    width: 100%;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    border: 2px solid #5fa05f;
+    border-top: 0px;
+    border-radius: 0px;
+    padding-bottom: 20px;
+}
+#finals .pouletitel{
+    width: 100%;
+    border-top: 2px solid #5fa05f;
+    border-bottom: 2px solid #5fa05f;
+    border-radius: 0px;
+    margin-bottom: 20px;
+}
+#finals .pouletitel h3{
+    margin-bottom: 20px;
+}
+#finals #pouleitems.content{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+#finals .topscoorder{
+    height: 259px;
+    margin: 0px;
+}
+#finals .pouletitel form{
+    margin-top: 20px;
+    margin-left: 5px;
+}
+
+
 
 
 

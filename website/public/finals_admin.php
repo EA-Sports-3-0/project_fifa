@@ -1,7 +1,25 @@
-<?php 
-require("head.php"); 
-session_start();
+<?php require("head.php"); 
 require("../app/database.php");
+session_start();?>
+
+<?php 
+if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
+	header('location:405.html');
+}
+
+if (isset($_POST['scoorder1'])) {
+	if (!isset($_SESSION['scoorder1'])) {
+    	$_SESSION['scoorder1'] = array();
+	}
+	array_push($_SESSION['scoorder1'], $_POST['scoorder1']);
+}
+
+if (isset($_POST['scoorder2'])) {
+	if (!isset($_SESSION['scoorder2'])) {
+    	$_SESSION['scoorder2'] = array();
+	}
+	array_push($_SESSION['scoorder2'], $_POST['scoorder2']);
+}
 ?>
 
     <div class="container">
@@ -15,13 +33,14 @@ require("../app/database.php");
 						if (isset($_SESSION['valid']) && $_SESSION['valid'] == true) {
 							echo '<li role="presentation"><a href="invoeren_resultaten.php">invoeren resultaten</a></li>';
 							echo '<li role="presentation"><a href="invoeren_TS.php">invoeren T&S</a></li>';
-							echo '<li role="presentation"><a href="finals_admin.php">finals</a></li>';
+							echo '<li role="presentation" class="active"><a href="finals_admin.php">finals</a></li>';
 						}
 						else{
 							echo '<li role="presentation"><a href="resultaten.php">resultaten</a></li>';
-							echo '<li role="presentation" class="active"><a href="finals.php">finals</a></li>';
+							echo '<li role="presentation"><a href="finals.php">finals</a></li>';
 						}
 					?>
+					
 				</ul>
 			</div>
 			<div class="buffer"></div>
@@ -150,6 +169,10 @@ require("../app/database.php");
     <div class="container" id="poulestanden">
 	        	<div class="pouletitel">
 	            	<h3>Poulestanden</h3>
+	            	<form method='post' action='../app/game_creator.php'>
+                		<input type='hidden' value="true" name='create'>
+                		<input type="submit" value="create game!">
+            		</form>
 		        </div>
 		        <div class="content" id="pouleitems">
 			        <div class="poulestanden">
@@ -187,8 +210,8 @@ require("../app/database.php");
 	                            	$team = $base['name'];
 	                            	echo "
 	                            	<tr>
-				                    	<th>$team</th>
-				                    	<th>$points</th>
+			                    		<th>$team</th>
+			                    		<th>$points</th>
 				                	</tr>
 									";
 	                            }
