@@ -122,165 +122,88 @@ session_start();?>
 		        <div class="poulestanden">
                     <h3>poule A</h3>
                     <div class="content">
-                        <table width="90%">
-                            <tr>
-                                <th>Team</th>
-                                <th>Score</th>
-                            </tr>
-                            <?php   
+                            <table width="90%">
+                                <tr>
+                                    <th>Team</th>
+                                    <th>Score</th>
+                                </tr>
+                                <?php   
 
-                            $sql = "SELECT * FROM `tbl_matches` WHERE `poule_id` = 1";
-                            $matchCount = $db->query($sql)->rowCount();
-                            $id = 0;
-                            $pouls = array();
-                            for ($i=0; $i < $matchCount; $i++) { 
+                                $sql = "SELECT * FROM `tbl_teams` WHERE `poule_id` = 1";
+                                $matchCount = $db->query($sql)->rowCount();
+                                $id = 0;
+                                for ($i=0; $i < $matchCount; $i++) { 
+                                    $points = 0;
 
-                                // get the match
-                                $sql = "SELECT * FROM `tbl_matches` WHERE `id` > '$id' AND `poule_id` = 1";
-                                $result = $db->query($sql);
-                                $base = $result->fetch(PDO::FETCH_ASSOC);
-                                $id = $base['id'];
+                                    $sql = "SELECT * FROM `tbl_teams` WHERE `id` > '$id' AND `poule_id` = 1";
+                                    $result = $db->query($sql);
+                                    $base = $result->fetch(PDO::FETCH_ASSOC);
+                                    $id = $base['id'];
 
-                                // get team1
-                                $sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_a']."'";
-                                $result = $db->query($sql);
-                                $row = $result->fetch(PDO::FETCH_ASSOC);
-                                $team1 = $row['name'];
+                                    $sql = "SELECT * FROM `tbl_players` WHERE `team_id` = $id";
+                                    $matchCount2 = $db->query($sql)->rowCount();
+                                    $id2 = 0;
+                                    for ($i2=0; $i2 < $matchCount2; $i2++) { 
+                                        $sql = "SELECT * FROM `tbl_players` WHERE `id` > '$id2' AND `team_id` = $id";
+                                        $result = $db->query($sql);
+                                        $player = $result->fetch(PDO::FETCH_ASSOC);
+                                        $id2 = $player['id'];
+                                        $points += $player['goals'];
+                                    }
 
-                                $sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_b']."'";
-                                $result = $db->query($sql);
-                                $row = $result->fetch(PDO::FETCH_ASSOC);
-                                $team2 = $row['name'];
-
-                                // get score team 1
-                                $sTeam1 = $base['score_team_a'];
-
-                                // get score team 2
-                                $sTeam2 = $base['score_team_b'];
-
-                                if ($sTeam1 > $sTeam2) {
-                                    $scTeam1 = 2;
-                                    $scTeam2 = 0;
-                                }
-                                elseif ($sTeam1 < $sTeam2) {
-                                    $scTeam1 = 0;
-                                    $scTeam2 = 2;
-                                }
-                                else{
-                                    $scTeam1 = 1;
-                                    $scTeam2 = 1;
-                                }
-
-                                if (isset($poule["$team1"])) {
-                                    $poule["$team1"] = $scTeam1 + $poule["$team1"];
-                                }
-                                else{
-                                    $poule["$team1"] = $scTeam1;
-                                }
-                                if (isset($poule["$team2"])) {
-                                    $poule["$team2"] = $scTeam2 + $poule["$team2"];
-                                }
-                                else{
-                                    $poule["$team2"] = $scTeam2;
-                                }
-                            }
-                            if (!empty($poule)) {
-                                arsort($poule);
-
-                                foreach ($poule as $key => $points) {
+                                    $team = $base['name'];
                                     echo "
                                     <tr>
-                                        <th>$key</th>
+                                        <th>$team</th>
                                         <th>$points</th>
                                     </tr>
                                     ";
                                 }
-                            }
-                            
-                            unset($poule);
 
-                            ?>
-                        </table>
-                    </div>
-                    <h3>poule B</h3>
-                    <div class="content">
-                        <table width="90%">
-                            <tr>
-                                <th>Team</th>
-                                <th>Score</th>
-                            </tr>
-                            <?php   
+                                ?>
+                            </table>
+                        </div>
+                        <h3>poule B</h3>
+                        <div class="content">
+                            <table width="90%">
+                                <tr>
+                                    <th>Team</th>
+                                    <th>Score</th>
+                                </tr>
+                                <?php   
+                                
+                                $sql = "SELECT * FROM `tbl_teams` WHERE `poule_id` = 2";
+                                $matchCount = $db->query($sql)->rowCount();
+                                $id = 0;
+                                for ($i=0; $i < $matchCount; $i++) { 
+                                    $points = 0;
 
-                            $sql = "SELECT * FROM `tbl_matches` WHERE `poule_id` = 2";
-                            $matchCount = $db->query($sql)->rowCount();
-                            $id = 0;
-                            $pouls = array();
-                            for ($i=0; $i < $matchCount; $i++) { 
+                                    $sql = "SELECT * FROM `tbl_teams` WHERE `id` > '$id' AND `poule_id` = 2";
+                                    $result = $db->query($sql);
+                                    $base = $result->fetch(PDO::FETCH_ASSOC);
+                                    $id = $base['id'];
 
-                                // get the match
-                                $sql = "SELECT * FROM `tbl_matches` WHERE `id` > '$id' AND `poule_id` = 2";
-                                $result = $db->query($sql);
-                                $base = $result->fetch(PDO::FETCH_ASSOC);
-                                $id = $base['id'];
+                                    $sql = "SELECT * FROM `tbl_players` WHERE `team_id` = $id";
+                                    $matchCount2 = $db->query($sql)->rowCount();
+                                    $id2 = 0;
+                                    for ($i2=0; $i2 < $matchCount2; $i2++) { 
+                                        $sql = "SELECT * FROM `tbl_players` WHERE `id` > '$id2' AND `team_id` = $id";
+                                        $result = $db->query($sql);
+                                        $player = $result->fetch(PDO::FETCH_ASSOC);
+                                        $id2 = $player['id'];
+                                        $points += $player['goals'];
+                                    }
 
-                                $sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_a']."'";
-                                $result = $db->query($sql);
-                                $row = $result->fetch(PDO::FETCH_ASSOC);
-                                $team1 = $row['name'];
-
-                                $sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_b']."'";
-                                $result = $db->query($sql);
-                                $row = $result->fetch(PDO::FETCH_ASSOC);
-                                $team2 = $row['name'];
-
-                                // get score team 1
-                                $sTeam1 = $base['score_team_a'];
-
-                                // get score team 2
-                                $sTeam2 = $base['score_team_b'];
-
-                                if ($sTeam1 > $sTeam2) {
-                                    $scTeam1 = 2;
-                                    $scTeam2 = 0;
-                                }
-                                elseif ($sTeam1 < $sTeam2) {
-                                    $scTeam1 = 0;
-                                    $scTeam2 = 2;
-                                }
-                                else{
-                                    $scTeam1 = 1;
-                                    $scTeam2 = 1;
-                                }
-
-                                if (isset($poule["$team1"])) {
-                                    $poule["$team1"] = $scTeam1 + $poule["$team1"];
-                                }
-                                else{
-                                    $poule["$team1"] = $scTeam1;
-                                }
-                                if (isset($poule["$team2"])) {
-                                    $poule["$team2"] = $scTeam2 + $poule["$team2"];
-                                }
-                                else{
-                                    $poule["$team2"] = $scTeam2;
-                                }
-                            }
-                            if (!empty($poule)) {
-                                arsort($poule);
-
-                                foreach ($poule as $key => $points) {
+                                    $team = $base['name'];
                                     echo "
                                     <tr>
-                                        <th>$key</th>
+                                        <th>$team</th>
                                         <th>$points</th>
                                     </tr>
                                     ";
                                 }
-                            }
-                            
-                            unset($poule);
 
-                            ?>
+                                ?>
                         </table>
                     </div>
                 </div>

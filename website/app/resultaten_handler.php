@@ -8,7 +8,7 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 }
 
 // check if all the required info is filled in.
-if (!isset($_POST['team1'])) {
+if (!isset($_SESSION['team1'])) {
 	$message = "vul alles in.";
 	header("location:../public/invoeren_resultaten.php?team1=$message");
 	$ready = false;
@@ -18,7 +18,7 @@ else{
 	
 }
 
-if (!isset($_POST['team2'])) {
+if (!isset($_SESSION['team2'])) {
 	$message = "vul alles in.";
 	header("location:../public/invoeren_resultaten.php?team1=$message");
 	$ready = false;
@@ -100,20 +100,13 @@ if (isset($scoorder2)) {
 
 if($ready == true)
 {
-	echo "ready == true<br>";
 	// get team_id_a
-	$team1 = $_POST['team1'];
-	$sql = "SELECT `id` FROM `tbl_teams` WHERE `name` = '$team1'";
-	$result = $db->query($sql);
-	$obj = $result->fetch(PDO::FETCH_ASSOC);
-	$team1 = $obj['id'];
+	$team1 = $_SESSION['team1'];
+	
 
 	// get team_id_b
-	$team2 = $_POST['team2'];
-	$sql = "SELECT `id` FROM `tbl_teams` WHERE `name` = '$team2'";
-	$result = $db->query($sql);
-	$obj = $result->fetch(PDO::FETCH_ASSOC);
-	$team2 = $obj['id'];
+	$team2 = $_SESSION['team2'];
+	
 
 	// get score_team_a
 	$point1 = $_POST['point1'];
@@ -122,14 +115,30 @@ if($ready == true)
 	$point2 = $_POST['point2'];
 
 	$date = date("Y-m-d H:i:s"); 
+	if (isset($_SESSION['team1']) && isset($_SESSION['team2']) && $_SESSION['team1'] != "" && $_SESSION['team2'] != "") {
+		$sql = "SELECT `place_id` FROM `tbl_matches` WHERE `team_id_a` = '$team1' AND `team_id_b` = '$team2'";
+		$result = $db->query($sql);
+		$obj = $result->fetch(PDO::FETCH_ASSOC);
+		$this_place_id = $obj['place_id'];
 
-	$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `score_team_a`, `score_team_b`, `poule_id`, `start_time`) 
-	VALUES ('$team1', '$team2', '$point1', '$point2', '1', '$date')";
-	echo $sql;
-	$db->query($sql);
+		$sql = "UPDATE `tbl_matches` SET `score_team_a` = '$point1', `score_team_b` = '$point2' WHERE `place_id` = '$this_place_id'";
+		$db->query($sql);
+	}
 
 	unset($_SESSION['scoorder1']);
 	unset($_SESSION['scoorder2']);
 }
-
-header("location:../public/invoeren_resultaten.php");
+$sql = "SELECT * FROM `tbl_matches`";
+	$matchCount = $db->query($sql)->rowCount();
+	$id = 0;
+	$matches = array();
+	for ($i=0; $i < $matchCount; $i++) { 
+		$sql = "SELECT * FROM `tbl_matches` WHERE `id` > '$id'";
+		$result = $db->query($sql);
+		$obj = $result->fetch(PDO::FETCH_ASSOC);
+		$id = $obj['id'];
+		$match = $obj['place_id'];
+		array_push($matches, $match);
+	}
+	var_dump($matches);
+// header("location:../public/invoeren_resultaten.php");

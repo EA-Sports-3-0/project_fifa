@@ -426,8 +426,12 @@ form#teaminvoer .playername{
 }
 #finals .teams{
     width: 40%;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
     display: flex;
-    justify-content:space-around;
+    flex-direction: column;
     text-align: center;
 }
 #finals .teams p{

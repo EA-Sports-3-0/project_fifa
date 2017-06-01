@@ -46,7 +46,7 @@ if ($ready == 0) {
 	}
 	if ($ready == 2) {
         if ($_POST['teamname'] != "") {
-            $sql = "INSERT INTO `tbl_teams` (`poule_id`, `name`, `set_players`) VALUES ('1', '".$_POST['teamname']."', '0')";
+            $sql = "INSERT INTO `tbl_teams` (`poule_id`, `name`, `set_players`) VALUES ('2', '".$_POST['teamname']."', '0')";
             $db->query($sql);
         }
 
@@ -71,7 +71,7 @@ if ($ready == 0) {
 	}
 
 	if ($ready == 1) {
-		$sql = "UPDATE `tbl_teams` SET `poule_id` = '1', `name` = '".$_POST['teamname']."' WHERE `name` = '".$_SESSION['selectTeam']."'";
+		$sql = "UPDATE `tbl_teams` SET `poule_id` = '2', `name` = '".$_POST['teamname']."' WHERE `name` = '".$_SESSION['selectTeam']."'";
 		$db->query($sql);
 		$_SESSION['selectTeam'] = $_POST['teamname'];
 	}

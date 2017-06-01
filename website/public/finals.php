@@ -33,7 +33,22 @@ require("../app/database.php");
         <div class="winnaar">
             <div class="wedstrijd">
                 <div class="teams">
-                    <p>team 1</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'wwwww'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					if(isset($place)){
+						echo "<p>".$name."</p>";
+                    }
+                    else{
+                    	echo "...";
+                    }
+
+                     ?>
                 </div>
             </div>
         </div>
@@ -41,9 +56,35 @@ require("../app/database.php");
         <div class="finale">
             <div class="wedstrijd">
                 <div class="teams">
-                    <p>3</p>
-                    <p>VS</p>
-                    <p>4</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'www1'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'www2'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
             </div>
         </div>
@@ -51,16 +92,68 @@ require("../app/database.php");
         <div class="halvefinales">
             <div class="wedstrijd">
                 <div class="teams">
-                    <p>3</p>
-                    <p>VS</p>
-                    <p>4</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'ww1'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'ww2'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
             </div>
             <div class="wedstrijd">
                 <div class="teams">
-                    <p>3</p>
-                    <p>VS</p>
-                    <p>4</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'ww3'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'ww4'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
             </div>
         </div>
@@ -68,30 +161,134 @@ require("../app/database.php");
         <div class="kwartfinales">
             <div class="wedstrijd">
                 <div class="teams">
-                    <p>3</p>
-                    <p>VS</p>
-                    <p>4</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'w1'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'w2'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
             </div>
             <div class="wedstrijd">
                 <div class="teams">
-                    <p>3</p>
-                    <p>VS</p>
-                    <p>4</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'w3'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'w4'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
             </div>
             <div class="wedstrijd">
                 <div class="teams">
-                    <p>3</p>
-                    <p>VS</p>
-                    <p>4</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'w5'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'w6'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
             </div>
             <div class="wedstrijd">
                 <div class="teams">
-                    <p>3</p>
-                    <p>VS</p>
-                    <p>4</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'w7'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = 'w8'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
             </div>
         </div>
@@ -99,50 +296,258 @@ require("../app/database.php");
         <div class="groepsfase">
             <div class="groepen">
                 <div class="teams">
-                    <p>1</p>
-                    <p>vs</p>
-                    <p>2</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '1'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '2'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
                 <div class="teams">
-                    <p>3</p>
-                    <p>VS</p>
-                    <p>4</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '3'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '4'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
             </div>
             <div class="groepen">
                 <div class="teams">
-                    <p>1</p>
-                    <p>vs</p>
-                    <p>2</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '5'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '6'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
                 <div class="teams">
-                    <p>3</p>
-                    <p>VS</p>
-                    <p>4</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '7'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '8'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
             </div>
             <div class="groepen">
                 <div class="teams">
-                    <p>1</p>
-                    <p>vs</p>
-                    <p>2</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '9'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '10'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
                 <div class="teams">
-                    <p>3</p>
-                    <p>VS</p>
-                    <p>4</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '11'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '12'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
             </div>
             <div class="groepen">
                 <div class="teams">
-                    <p>1</p>
-                    <p>vs</p>
-                    <p>2</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '13'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '14'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
                 <div class="teams">
-                    <p>3</p>
-                    <p>VS</p>
-                    <p>4</p>
+                    <?php 
+
+                    $sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '15'";
+                    $result = $db->query($sql);
+    				$obj = $result->fetch(PDO::FETCH_ASSOC);
+					$place = $obj['place_id'];
+					$name = $obj['name'];
+
+					$sql = "SELECT * FROM `tbl_teams` WHERE `place_id` = '16'";
+                    $result2 = $db->query($sql);
+    				$obj2 = $result2->fetch(PDO::FETCH_ASSOC);
+					$place2 = $obj2['place_id'];
+					$name2 = $obj2['name'];
+
+					if(isset($place)){
+						echo "<p> ".$name." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+                    echo "<p> .VS. </p>";
+                    if(isset($place2)){
+						echo "<p> ".$name2." </p>";
+                    }
+                    else{
+                    	echo "<p> ... </p>";
+                    }
+
+                     ?>
                 </div>
             </div>
         </div>

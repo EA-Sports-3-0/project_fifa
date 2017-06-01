@@ -20,6 +20,16 @@ if (isset($_POST['scoorder2'])) {
 	}
 	array_push($_SESSION['scoorder2'], $_POST['scoorder2']);
 }
+
+if (isset($_POST['team1'])) {
+	$_SESSION['team1'] = $_POST['team1'];
+	unset($_SESSION['scoorder1']);
+}
+if (isset($_POST['team2'])) {
+	$_SESSION['team2'] = $_POST['team2'];
+	unset($_SESSION['scoorder2']);
+}
+
 ?>
 
     <div class="container">
@@ -52,38 +62,26 @@ if (isset($_POST['scoorder2'])) {
 	                	<form method="post" class="points" action="../app/resultaten_handler.php">
 		                    <div class="overzichtteam">
 		                        <div class="teamselect">
-		                            <select name="team1" id="team1">
+		                            <div class="teamname">
 		                            	<?php 
-		                            	echo '<option>Select Team</option>';
-			                            
-			                            $sql = "SELECT * FROM `tbl_teams`";
-			                            $teamCount = $db->query($sql)->rowCount();
-			                            $id = 0;
-			                            for ($i=1; $i <= $teamCount; $i++) { 
-			                            	$sql = "SELECT `name`, `id` FROM `tbl_teams` WHERE `id` > $id";
-			                            	$result = $db->query($sql);
-			                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
-			                            	$id = $obj['id'];
-			                            	echo "<option value='".$obj['name']."'>".$obj['name']."</option>";
-			                            }
-			                            ?>
-		                            </select>
-		                            <select name="team2" id="team2"">
+		                            	if (isset($_POST['team1'])) {
+		                            		$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = ".$_POST['team1']."";
+		                            		$result = $db->query($sql);
+    										$obj = $result->fetch(PDO::FETCH_ASSOC);
+    										echo "<p>".$obj['name']."</p>";
+		                            	}
+		                            	 ?>
+		                            </div>
+		                            <div class="teamname">
 		                            	<?php 
-		                            	echo '<option>Select Team</option>';
-			                            
-			                            $sql = "SELECT * FROM `tbl_teams`";
-			                            $teamCount = $db->query($sql)->rowCount();
-			                            $id = 0;
-			                            for ($i=1; $i <= $teamCount; $i++) { 
-			                            	$sql = "SELECT `name`, `id` FROM `tbl_teams` WHERE `id` > $id";
-			                            	$result = $db->query($sql);
-			                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
-			                            	$id = $obj['id'];
-			                            	echo "<option value='".$obj['name']."'>".$obj['name']."</option>";
-			                            }
-			                            ?>
-		                            </select>
+		                            	if (isset($_POST['team2'])) {
+		                            		$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = ".$_POST['team2']."";
+		                            		$result = $db->query($sql);
+    										$obj = $result->fetch(PDO::FETCH_ASSOC);
+    										echo "<p>".$obj['name']."</p>";
+		                            	}
+		                            	 ?>
+		                            </div>
 		                        </div>
 		                        <div class="aantalgoals">
 		                            <div>
@@ -107,20 +105,21 @@ if (isset($_POST['scoorder2'])) {
 
 										<?php 
 										echo '<option>Select scoorder</option>';
-
-										$sql = "SELECT * FROM `tbl_players`";
-			                            $playerCount = $db->query($sql)->rowCount();
-			                            $id = 0;
-										for ($i=0; $i <= $playerCount; $i++) { 
-											$sql = "SELECT `first_name`, `last_name`, `id` FROM `tbl_players` WHERE `id` > $id";
-											$result = $db->query($sql);
-			                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
-			                            	$players = $obj;
-			                            	$id = $obj['id'];
-			                            	if ($obj['first_name'] != "" || $obj['last_name'] != "") {
-			                            		echo "<option value='".$obj['first_name']." ".$obj['last_name']."'>".$obj['first_name']." ".$obj['last_name']."</option>";
+										if (isset($_SESSION['team1'])) {
+											$sql = "SELECT * FROM `tbl_players` WHERE `team_id` = ".$_SESSION['team1']."";
+				                            $playerCount = $db->query($sql)->rowCount();
+				                            $id = 0;
+											for ($i=0; $i <= $playerCount; $i++) { 
+												$sql = "SELECT `first_name`, `last_name`, `id` FROM `tbl_players` WHERE `id` > $id AND `team_id` = ".$_SESSION['team1']."";
+												$result = $db->query($sql);
+				                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
+				                            	$players = $obj;
+				                            	$id = $obj['id'];
+				                            	if ($obj['first_name'] != "" || $obj['last_name'] != "") {
+				                            		echo "<option value='".$obj['first_name']." ".$obj['last_name']."'>".$obj['first_name']." ".$obj['last_name']."</option>";
+				                            	}
 			                            	}
-		                            	}
+			                            }
 										?>
 
 		                            </select>
@@ -144,20 +143,21 @@ if (isset($_POST['scoorder2'])) {
 	                                    
 										<?php 
 										echo '<option>Select scoorder</option>';
-
-										$sql = "SELECT * FROM `tbl_players`";
-			                            $playerCount = $db->query($sql)->rowCount();
-			                            $id = 0;
-										for ($i=0; $i <= $playerCount; $i++) { 
-											$sql = "SELECT `first_name`, `last_name`, `id` FROM `tbl_players` WHERE `id` > $id";
-											$result = $db->query($sql);
-			                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
-			                            	$players = $obj;
-			                            	$id = $obj['id'];
-			                            	if ($obj['first_name'] != "" || $obj['last_name'] != "") {
-			                            		echo "<option value='".$obj['first_name']." ".$obj['last_name']."'>".$obj['first_name']." ".$obj['last_name']."</option>";
+										if (isset($_SESSION['team2'])) {
+											$sql = "SELECT * FROM `tbl_players` WHERE `team_id` = ".$_SESSION['team2']."";
+				                            $playerCount = $db->query($sql)->rowCount();
+				                            $id = 0;
+											for ($i=0; $i <= $playerCount; $i++) { 
+												$sql = "SELECT `first_name`, `last_name`, `id` FROM `tbl_players` WHERE `id` > $id AND `team_id` = ".$_SESSION['team2']."";
+												$result = $db->query($sql);
+				                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
+				                            	$players = $obj;
+				                            	$id = $obj['id'];
+				                            	if ($obj['first_name'] != "" || $obj['last_name'] != "") {
+				                            		echo "<option value='".$obj['first_name']." ".$obj['last_name']."'>".$obj['first_name']." ".$obj['last_name']."</option>";
+				                            	}
 			                            	}
-		                            	}
+			                            }
 										?>
 
 		                            </select>
@@ -177,6 +177,9 @@ if (isset($_POST['scoorder2'])) {
 	                </div>
 	            </div>
 	            <div class="tijdschema">
+	            <form action="../app/download.php">
+                	<input type="submit" value="download matches.csv">
+                </form>
 	                <h3>Tijdschema</h3>
 	                <div class="content">
 		                <table width="90%">
@@ -185,36 +188,45 @@ if (isset($_POST['scoorder2'])) {
 		                        <th>Team</th>
 		                        <th>Tijd</th>
 		                    </tr>
-		                    <?php 
+		                    
+			                    <?php 
 
-		                    $sql = "SELECT * FROM `tbl_matches`";
-                            $matchCount = $db->query($sql)->rowCount();
-                            $id = 0;
-                            for ($i=0; $i < $matchCount; $i++) { 
+			                    $sql = "SELECT * FROM `tbl_matches`";
+	                            $matchCount = $db->query($sql)->rowCount();
+	                            $id = 0;
+	                            for ($i=0; $i < $matchCount; $i++) { 
 
-                            	$sql = "SELECT * FROM `tbl_matches` WHERE `id` > '$id'";
-                            	$result = $db->query($sql);
-                            	$base = $result->fetch(PDO::FETCH_ASSOC);
-                            	$id = $base['id'];
+	                            	$sql = "SELECT * FROM `tbl_matches` WHERE `id` > '$id'";
+	                            	$result = $db->query($sql);
+	                            	$base = $result->fetch(PDO::FETCH_ASSOC);
+	                            	$id = $base['id'];
 
-                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_a']."'";
-                            	$result = $db->query($sql);
-                            	$row = $result->fetch(PDO::FETCH_ASSOC);
-                            	$team1 = $row['name'];
+	                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_a']."'";
+	                            	$result = $db->query($sql);
+	                            	$row = $result->fetch(PDO::FETCH_ASSOC);
+	                            	$team1 = $row['name'];
 
-                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_b']."'";
-                            	$result = $db->query($sql);
-                            	$row = $result->fetch(PDO::FETCH_ASSOC);
-                            	$team2 = $row['name'];
+	                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_b']."'";
+	                            	$result = $db->query($sql);
+	                            	$row = $result->fetch(PDO::FETCH_ASSOC);
+	                            	$team2 = $row['name'];
 
-                            	echo "
-                            	<tr>
-                            		<th>$team1</th>
-                            		<th>$team2</th>
-                            		<th>".$base['start_time']."</th>
-                            	</tr>";
-                            }
-		                    ?>
+	                            	echo "
+	                            	<tr>
+	                            		<th>$team1</th>
+	                            		<th>$team2</th>
+	                            		<th>".$base['start_time']."</th>
+	                            	<form method='post' action='#'>
+	                            		<input type='hidden' name='team1' value='".$base['team_id_a']."' class='btn btn-primary'>
+                            			<input type='hidden' name='team2' value='".$base['team_id_b']."' class='btn btn-primary'>";
+                            			if(isset($base['team_id_a']) && isset($base['team_id_b'])){
+			        						echo "<th><input type='submit' value='edit'></th>";
+			        					}
+
+		        						echo "</form>
+	                            	</tr>";
+	                            }
+			                    ?>
 		                </table>
 		            </div>
 	            </div>
@@ -226,207 +238,131 @@ if (isset($_POST['scoorder2'])) {
 		        <div class="poulestanden">
 		        	<h3>poule A</h3>
 			        <div class="content">
-			            <table width="90%">
-			                <tr>
-			                    <th>Team</th>
-			                    <th>Score</th>
-			                </tr>
-			                <?php 	
+				            <table width="90%">
+				                <tr>
+				                    <th>Team</th>
+				                    <th>Score</th>
+				                </tr>
+				                <?php 	
 
-			                $sql = "SELECT * FROM `tbl_matches` WHERE `poule_id` = 1";
-                            $matchCount = $db->query($sql)->rowCount();
-                            $id = 0;
-                            $pouls = array();
-                            for ($i=0; $i < $matchCount; $i++) { 
+	                            $sql = "SELECT * FROM `tbl_teams` WHERE `poule_id` = 1";
+	                            $matchCount = $db->query($sql)->rowCount();
+	                            $id = 0;
+	                            for ($i=0; $i < $matchCount; $i++) { 
+	                            	$points = 0;
 
-                            	// get the match
-                            	$sql = "SELECT * FROM `tbl_matches` WHERE `id` > '$id' AND `poule_id` = 1";
-                            	$result = $db->query($sql);
-                            	$base = $result->fetch(PDO::FETCH_ASSOC);
-                            	$id = $base['id'];
+	                            	$sql = "SELECT * FROM `tbl_teams` WHERE `id` > '$id' AND `poule_id` = 1";
+	                            	$result = $db->query($sql);
+	                            	$base = $result->fetch(PDO::FETCH_ASSOC);
+	                            	$id = $base['id'];
 
-                            	// get team1
-                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_a']."'";
-                            	$result = $db->query($sql);
-                            	$row = $result->fetch(PDO::FETCH_ASSOC);
-                            	$team1 = $row['name'];
+	                            	$sql = "SELECT * FROM `tbl_players` WHERE `team_id` = $id";
+	                            	$matchCount2 = $db->query($sql)->rowCount();
+	                            	$id2 = 0;
+	                            	for ($i2=0; $i2 < $matchCount2; $i2++) { 
+	                            		$sql = "SELECT * FROM `tbl_players` WHERE `id` > '$id2' AND `team_id` = $id";
+	                            		$result = $db->query($sql);
+	                            		$player = $result->fetch(PDO::FETCH_ASSOC);
+	                            		$id2 = $player['id'];
+	                            		$points += $player['goals'];
+	                            	}
 
-                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_b']."'";
-                            	$result = $db->query($sql);
-                            	$row = $result->fetch(PDO::FETCH_ASSOC);
-                            	$team2 = $row['name'];
-
-                            	// get score team 1
-                            	$sTeam1 = $base['score_team_a'];
-
-                            	// get score team 2
-                            	$sTeam2 = $base['score_team_b'];
-
-                            	if ($sTeam1 > $sTeam2) {
-                            		$scTeam1 = 2;
-                            		$scTeam2 = 0;
-                            	}
-                            	elseif ($sTeam1 < $sTeam2) {
-                            		$scTeam1 = 0;
-                            		$scTeam2 = 2;
-                            	}
-                            	else{
-                            		$scTeam1 = 1;
-                            		$scTeam2 = 1;
-                            	}
-
-                            	if (isset($poule["$team1"])) {
-                            		$poule["$team1"] = $scTeam1 + $poule["$team1"];
-                            	}
-                            	else{
-                            		$poule["$team1"] = $scTeam1;
-                            	}
-                            	if (isset($poule["$team2"])) {
-                            		$poule["$team2"] = $scTeam2 + $poule["$team2"];
-                            	}
-                            	else{
-                            		$poule["$team2"] = $scTeam2;
-                            	}
-                            }
-                            if (!empty($poule)) {
-                            	arsort($poule);
-
-	                            foreach ($poule as $key => $points) {
+	                            	$team = $base['name'];
 	                            	echo "
 	                            	<tr>
-				                    	<th>$key</th>
+				                    	<th>$team</th>
 				                    	<th>$points</th>
 				                	</tr>
 									";
 	                            }
-                            }
-                            
-                            unset($poule);
 
-			                ?>
-			            </table>
-		            </div>
-		            <h3>poule B</h3>
-		            <div class="content">
-			            <table width="90%">
-			                <tr>
-			                    <th>Team</th>
-			                    <th>Score</th>
-			                </tr>
-			                <?php 	
+				                ?>
+				            </table>
+			            </div>
+			            <h3>poule B</h3>
+			            <div class="content">
+				            <table width="90%">
+				                <tr>
+				                    <th>Team</th>
+				                    <th>Score</th>
+				                </tr>
+				                <?php 	
+				                
+	                            $sql = "SELECT * FROM `tbl_teams` WHERE `poule_id` = 2";
+	                            $matchCount = $db->query($sql)->rowCount();
+	                            $id = 0;
+	                            for ($i=0; $i < $matchCount; $i++) { 
+	                            	$points = 0;
 
-			                $sql = "SELECT * FROM `tbl_matches` WHERE `poule_id` = 2";
-                            $matchCount = $db->query($sql)->rowCount();
-                            $id = 0;
-                            $pouls = array();
-                            for ($i=0; $i < $matchCount; $i++) { 
+	                            	$sql = "SELECT * FROM `tbl_teams` WHERE `id` > '$id' AND `poule_id` = 2";
+	                            	$result = $db->query($sql);
+	                            	$base = $result->fetch(PDO::FETCH_ASSOC);
+	                            	$id = $base['id'];
 
-                            	// get the match
-                            	$sql = "SELECT * FROM `tbl_matches` WHERE `id` > '$id' AND `poule_id` = 2";
-                            	$result = $db->query($sql);
-                            	$base = $result->fetch(PDO::FETCH_ASSOC);
-                            	$id = $base['id'];
+	                            	$sql = "SELECT * FROM `tbl_players` WHERE `team_id` = $id";
+	                            	$matchCount2 = $db->query($sql)->rowCount();
+	                            	$id2 = 0;
+	                            	for ($i2=0; $i2 < $matchCount2; $i2++) { 
+	                            		$sql = "SELECT * FROM `tbl_players` WHERE `id` > '$id2' AND `team_id` = $id";
+	                            		$result = $db->query($sql);
+	                            		$player = $result->fetch(PDO::FETCH_ASSOC);
+	                            		$id2 = $player['id'];
+	                            		$points += $player['goals'];
+	                            	}
 
-                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_a']."'";
-                            	$result = $db->query($sql);
-                            	$row = $result->fetch(PDO::FETCH_ASSOC);
-                            	$team1 = $row['name'];
-
-                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_b']."'";
-                            	$result = $db->query($sql);
-                            	$row = $result->fetch(PDO::FETCH_ASSOC);
-                            	$team2 = $row['name'];
-
-                            	// get score team 1
-                            	$sTeam1 = $base['score_team_a'];
-
-                            	// get score team 2
-                            	$sTeam2 = $base['score_team_b'];
-
-                            	if ($sTeam1 > $sTeam2) {
-                            		$scTeam1 = 2;
-                            		$scTeam2 = 0;
-                            	}
-                            	elseif ($sTeam1 < $sTeam2) {
-                            		$scTeam1 = 0;
-                            		$scTeam2 = 2;
-                            	}
-                            	else{
-                            		$scTeam1 = 1;
-                            		$scTeam2 = 1;
-                            	}
-
-                            	if (isset($poule["$team1"])) {
-                            		$poule["$team1"] = $scTeam1 + $poule["$team1"];
-                            	}
-                            	else{
-                            		$poule["$team1"] = $scTeam1;
-                            	}
-                            	if (isset($poule["$team2"])) {
-                            		$poule["$team2"] = $scTeam2 + $poule["$team2"];
-                            	}
-                            	else{
-                            		$poule["$team2"] = $scTeam2;
-                            	}
-                            }
-                            if (!empty($poule)) {
-                            	arsort($poule);
-
-	                            foreach ($poule as $key => $points) {
+	                            	$team = $base['name'];
 	                            	echo "
 	                            	<tr>
-				                    	<th>$key</th>
+				                    	<th>$team</th>
 				                    	<th>$points</th>
 				                	</tr>
 									";
 	                            }
-                            }
-                            
-                            unset($poule);
 
-			                ?>
+				                ?>
 			            </table>
 		            </div>
 		        </div>
 		        <div class="topscoorder">
-		        	<?php 
+			        
+			        	<?php 
 
-		        	$sql = "SELECT * FROM `tbl_players`";
-                    $matchCount = $db->query($sql)->rowCount();
-                    $id = 0;
-                    $pouls = array();
-                    for ($i=0; $i < $matchCount; $i++) { 
-                    	$sql = "SELECT * FROM `tbl_players` WHERE `id` > '$id'";
-                    	$result = $db->query($sql);
-                    	$row = $result->fetch(PDO::FETCH_ASSOC);
-                    	$goals = $row['goals'];
-                    	$name = "".$row['first_name']." ".$row['last_name']."";
-                    	$id = $row['id'];
+			        	$sql = "SELECT * FROM `tbl_players`";
+	                    $matchCount = $db->query($sql)->rowCount();
+	                    $id = 0;
+	                    $pouls = array();
+	                    for ($i=0; $i < $matchCount; $i++) { 
+	                    	$sql = "SELECT * FROM `tbl_players` WHERE `id` > '$id'";
+	                    	$result = $db->query($sql);
+	                    	$row = $result->fetch(PDO::FETCH_ASSOC);
+	                    	$goals = $row['goals'];
+	                    	$name = "".$row['first_name']." ".$row['last_name']."";
+	                    	$id = $row['id'];
 
-                    	if (isset($poule["$name"])) {
-	                		$poule["$name"] = $goals + $poule["$name"];
-	                	}
-	                	else{
-	                		$poule["$name"] = $goals;
-	                	}
-                    }
-					if (!empty($poule)) {
-                    	arsort($poule);
+	                    	if (isset($poule["$name"])) {
+		                		$poule["$name"] = $goals + $poule["$name"];
+		                	}
+		                	else{
+		                		$poule["$name"] = $goals;
+		                	}
+	                    }
+						if (!empty($poule)) {
+	                    	arsort($poule);
 
-                    	$name = key($poule);
-                    	$goals = array_shift($poule);
-                    	
-                    	echo "
-                    	<h3><b>Topscoorder</b></h3>
-			            <h2>$name</h2>
-			            <h3><b>Aantal goals</b></h3>
-			            <h2>$goals</h2>
-						";
-                    }
+	                    	$name = key($poule);
+	                    	$goals = array_shift($poule);
+	                    	
+	                    	echo "
+	                    	<h3><b>Topscoorder</b></h3>
+				            <h2>$name</h2>
+				            <h3><b>Aantal goals</b></h3>
+				            <h2>$goals</h2>
+							";
+	                    }
 
-                    unset($poule);
+	                    unset($poule);
 
-		        	?>
+			        	?>
 		        </div>
 	        </div>
 	        
