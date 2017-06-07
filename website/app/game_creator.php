@@ -2,6 +2,13 @@
 require("database.php");
 session_start();
 
+if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
+	header('location:405.html');
+}
+
+$sql = "UPDATE `tbl_players` SET `goals` = 0";
+$db->query($sql);
+
 $sql = "SELECT * FROM `tbl_teams`";
 $teamCount = $db->query($sql)->rowCount();
 $teams = array();
