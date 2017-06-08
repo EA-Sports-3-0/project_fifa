@@ -200,7 +200,7 @@ if (isset($_POST['team2'])) {
 	                            	$result = $db->query($sql);
 	                            	$base = $result->fetch(PDO::FETCH_ASSOC);
 	                            	$id = $base['id'];
-
+	                            	
 	                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_a']."'";
 	                            	$result = $db->query($sql);
 	                            	$row = $result->fetch(PDO::FETCH_ASSOC);
@@ -220,13 +220,19 @@ if (isset($_POST['team2'])) {
 	                            		<input type='hidden' name='team1' value='".$base['team_id_a']."' class='btn btn-primary'>
                             			<input type='hidden' name='team2' value='".$base['team_id_b']."' class='btn btn-primary'>";
                             			if(isset($base['team_id_a']) && isset($base['team_id_b'])){
-			        						echo "<th><input type='submit' value='edit'></th>";
+                            				if (isset($base['score_team_a']) || isset($base['score_team_b'])) {
+                            					echo "<th><i class='glyphicon glyphicon-ok'></i> ".$base['score_team_a']." / ".$base['score_team_b']."</th>";
+                            				}
+                            				else{
+                            					echo "<th><i class='glyphicon glyphicon-pencil'></i> <input type='submit' value='edit'></th>";
+                            				}
 			        					}
 
 		        						echo "</form>
 	                            	</tr>";
 	                            }
 			                    ?>
+
 		                </table>
 		            </div>
 	            </div>
