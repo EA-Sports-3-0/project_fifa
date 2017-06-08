@@ -51,7 +51,7 @@ namespace ProjectFifaV2
 
         private void btnShowRanking_Click(object sender, EventArgs e)
         {
-            frmRanking = new frmRanking();
+            frmRanking = new frmRanking(userName, userID);
             frmRanking.Show();
         }
 
@@ -75,6 +75,13 @@ namespace ProjectFifaV2
         private void btnEditPrediction_Click(object sender, EventArgs e)
         {
             dbh.OpenConnectionToDB();
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM [tblPredictions] WHERE user_id = @userID", dbh.GetCon()))
+            {
+                cmd.Connection = dbh.GetCon();
+                cmd.Parameters.AddWithValue("userID", userID);
+                cmd.ExecuteNonQuery();
+                dbh.CloseConnectionToDB();
+            }
             if (!DisableEditButton())
             {
                 int gameID = 99;
@@ -84,10 +91,13 @@ namespace ProjectFifaV2
                 //query to get the GameID
                 using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM [tblGames]", dbh.GetCon()))
                 {
+                    dbh.OpenConnectionToDB();
+                    cmd.Connection = dbh.GetCon();
                     SqlDataReader dr = cmd.ExecuteReader();
                     dr.Read();
                     matches = dr.GetInt32(0);
                     dr.Close();
+                    dbh.CloseConnectionToDB();
                 }
                 for (int i = 0; i < matches*2; i += 2)
                 {
@@ -100,12 +110,15 @@ namespace ProjectFifaV2
                     //query to add values into tblPredictions
                     using (SqlCommand cmd = new SqlCommand("INSERT INTO [tblPredictions] ([User_id], [Game_id], [PredictedHomeScore], [PredictedAwayScore]) VALUES (@userID, @gameID, @homeScore, @awayScore)"))
                     {
+                        dbh.OpenConnectionToDB();
+                        cmd.Connection = dbh.GetCon();
                         cmd.Parameters.AddWithValue("UserID", userID);
                         cmd.Parameters.AddWithValue("GameId", gameID);
                         cmd.Parameters.AddWithValue("HomeScore", homeScore);
                         cmd.Parameters.AddWithValue("AwayScore", awayScore);
                         cmd.Connection = dbh.GetCon();
                         cmd.ExecuteNonQuery();
+                        dbh.CloseConnectionToDB();
 
                     }
                 }

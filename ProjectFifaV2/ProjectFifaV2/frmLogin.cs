@@ -84,7 +84,7 @@ namespace ProjectFifaV2
 
         private void btnShowRanking_Click(object sender, EventArgs e)
         {
-            frmRanking = new frmRanking();
+            frmRanking = new frmRanking("NameNull", 0);
             frmRanking.Show();
         }
 
