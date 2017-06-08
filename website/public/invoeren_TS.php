@@ -34,12 +34,12 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 	        $team = $_SESSION['selectTeam'];
 
 	        $sql = $db->prepare("SELECT * FROM `tbl_teams` WHERE `name` = ?");
-	        $sql->execute($team));
+	        $sql->execute(array($team));
 			$obj = $sql->fetch(PDO::FETCH_ASSOC);
 			$teamid = $obj['id'];
 
 	        $sql = $db->prepare("SELECT * FROM `tbl_players` WHERE `team_id` = ?");
-	        $matchCount = $sql->execute($teamid))->rowCount();
+	        $matchCount = $sql->execute(array($teamid))->rowCount();
 	        $id = 0;
 	        $fnames = array("no.0");
 			$lnames = array("no.0");
