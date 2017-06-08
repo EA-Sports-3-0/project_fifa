@@ -52,14 +52,14 @@ session_start();?>
                                 $base = $result->fetch(PDO::FETCH_ASSOC);
                                 $id = $base['id'];
 
-                                $sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_a']."'";
-                                $result = $db->query($sql);
-                                $row = $result->fetch(PDO::FETCH_ASSOC);
+                                $sql = $db->prepare("SELECT `name` FROM `tbl_teams` WHERE `id` = ?");
+                                $sql->execute($base['team_id_a']));
+                                $obj = $sql->fetch(PDO::FETCH_ASSOC);
                                 $team1 = $row['name'];
 
-                                $sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_b']."'";
-                                $result = $db->query($sql);
-                                $row = $result->fetch(PDO::FETCH_ASSOC);
+                                $sql = $db->prepare("SELECT `name` FROM `tbl_teams` WHERE `id` = ?");
+                                $sql->execute($base['team_id_b']));
+                                $obj = $sql->fetch(PDO::FETCH_ASSOC);
                                 $team2 = $row['name'];
 
                                 echo "

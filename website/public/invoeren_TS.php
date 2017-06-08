@@ -33,20 +33,20 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 		if (isset($_SESSION['selectTeam'])) {
 	        $team = $_SESSION['selectTeam'];
 
-	        $sql = "SELECT * FROM `tbl_teams` WHERE `name` = '$team'";
-	        $result = $db->query($sql);
-        	$obj = $result->fetch(PDO::FETCH_ASSOC);
+	        $sql = $db->prepare("SELECT * FROM `tbl_teams` WHERE `name` = ?");
+	        $sql->execute($team));
+			$obj = $sql->fetch(PDO::FETCH_ASSOC);
 			$teamid = $obj['id'];
 
-	        $sql = "SELECT * FROM `tbl_players` WHERE `team_id` = $teamid";
-	        $matchCount = $db->query($sql)->rowCount();
+	        $sql = $db->prepare("SELECT * FROM `tbl_players` WHERE `team_id` = ?");
+	        $matchCount = $sql->execute($teamid))->rowCount();
 	        $id = 0;
 	        $fnames = array("no.0");
 			$lnames = array("no.0");
 	        for ($i=0; $i < $matchCount; $i++) { 
-	        	$sql = "SELECT * FROM `tbl_players` WHERE `team_id` = '$teamid' AND `id` > '$id'";
-	        	$result = $db->query($sql);
-            	$obj = $result->fetch(PDO::FETCH_ASSOC);
+	        	$sql = $db->prepare("SELECT * FROM `tbl_players` WHERE `team_id` = ? AND `id` > '$id'");
+	        	$sql->execute(array($teamid));
+				$obj = $sql->fetch(PDO::FETCH_ASSOC);
 				$id = $obj['id'];
 
 	        	$fname = $obj['first_name'];

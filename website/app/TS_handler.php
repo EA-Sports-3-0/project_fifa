@@ -11,10 +11,10 @@ if (!isset($_POST['teamname'])) {
 	$ready = 1;
 }
 
-$team = $_POST['teamname'];
-$sql = "SELECT * FROM `tbl_teams` WHERE `name` = '$team'";
-$result = $db->query($sql);
-$obj = $result->fetch(PDO::FETCH_ASSOC);
+
+$sql = $db->prepare("SELECT * FROM `tbl_teams` WHERE `name` = ?");
+$sql->execute(array($_POST['teamname']));
+$obj = $sql->fetch(PDO::FETCH_ASSOC);
 $teamid = $obj['id'];
 
 if ($ready == 0) {
@@ -46,33 +46,37 @@ if ($ready == 0) {
 	}
 	if ($ready == 2) {
         if ($_POST['teamname'] != "") {
-            $sql = "INSERT INTO `tbl_teams` (`poule_id`, `name`, `set_players`) VALUES ('2', '".$_POST['teamname']."', '0')";
-            $db->query($sql);
+            $sql = $db->prepare("INSERT INTO `tbl_teams` (`poule_id`, `name`, `set_players`) VALUES ('2', ?, '0')");
+            $sql->execute(array($_POST['teamname']));
+            $sql = $db->prepare("SELECT * FROM `tbl_teams` WHERE `name` = ?");
+			$sql->execute(array($_POST['teamname']));
+			$obj = $sql->fetch(PDO::FETCH_ASSOC);
+			$teamid = $obj['id'];
         }
 
-		$sql = "SELECT * FROM `tbl_teams` WHERE `name` = '".$_POST['teamname']."'";
-		$result = $db->query($sql);
-    	$obj = $result->fetch(PDO::FETCH_ASSOC);
+		$sql = $db->prepare("SELECT * FROM `tbl_teams` WHERE `name` = ?");
+		$sql->execute(array($_POST['teamname']));
+		$obj = $sql->fetch(PDO::FETCH_ASSOC);
 		$set = $obj['set_players'];
 
 		if ($set == 0) {
 			for ($i=1; $i <= 7; $i++) { 
-				$sql = "INSERT INTO `tbl_players` (`student_id`, `team_id`, `goals`, `first_name`, `last_name`) VALUES ('d000000', '".$teamid."', '0', '".$_POST["first_name$i"]."', '".$_POST["last_name$i"]."')";
-				$db->query($sql);
+				$sql = $db->prepare("INSERT INTO `tbl_players` (`student_id`, `team_id`, `goals`, `first_name`, `last_name`) VALUES ('d000000', ?, '0', ?, ?)");
+				$sql->execute(array($teamid, $_POST["first_name$i"], $_POST["last_name$i"]));
 			}
-            $sql = "SELECT * FROM `tbl_players` WHERE `team_id` = '".$teamid."'";
-            $result = $db->query($sql);
-            $obj = $result->fetch(PDO::FETCH_ASSOC);
+            $sql = $db->prepare("SELECT * FROM `tbl_players` WHERE `team_id` = ?");
+            $sql->execute(array($teamid));
+			$obj = $sql->fetch(PDO::FETCH_ASSOC);
             if (isset($obj['id'])) {
-                $sql = "UPDATE `tbl_teams` SET `set_players` = '1' WHERE `name` = '".$_POST['teamname']."'";
-                $db->query($sql);
+                $sql = $db->prepare("UPDATE `tbl_teams` SET `set_players` = '1' WHERE `name` = ?");
+                $sql->execute(array($_POST['teamname']));
             }
 		}
 	}
 
 	if ($ready == 1) {
-		$sql = "UPDATE `tbl_teams` SET `poule_id` = '2', `name` = '".$_POST['teamname']."' WHERE `name` = '".$_SESSION['selectTeam']."'";
-		$db->query($sql);
+		$sql = $db->prepare("UPDATE `tbl_teams` SET `poule_id` = '2', `name` = ? WHERE `name` = ?");
+		$sql->execute(array($_POST['teamname'], $_SESSION['selectTeam']));
 		$_SESSION['selectTeam'] = $_POST['teamname'];
 	}
 
@@ -99,12 +103,12 @@ if ($ready == 0) {
 		array_push($pids, $pid);
 	}
 	for ($i=1; $i <= 7; $i++) { 
-		$sql = "UPDATE `tbl_players` SET `first_name` = '".$_POST["first_name$i"]."' WHERE `id` = '".$pids[$i]."'";
-		$db->query($sql);
+		$sql = $db->prepare("UPDATE `tbl_players` SET `first_name` = ? WHERE `id` = ?");
+		$sql->execute(array($_POST["first_name$i"], $pids[$i]));
 	}
 	for ($i=1; $i <= 7; $i++) { 
-		$sql = "UPDATE `tbl_players` SET `last_name` = '".$_POST["last_name$i"]."' WHERE `id` = '".$pids[$i]."'";
-		$db->query($sql);
+		$sql = $db->prepare("UPDATE `tbl_players` SET `last_name` = ? WHERE `id` = ?");
+		$sql->execute(array($_POST["last_name$i"], $pids[$i]));
 	}
 }
 
@@ -120,15 +124,12 @@ for ($i=1; $i <= $teamCount; $i++) {
 	if (isset($_POST[$obj['name']]) && $_POST[$obj['name']] == 'X') {
         $sql = "UPDATE `tbl_teams` SET `set_players` = '0' WHERE `id` = '".$id."'";
         $db->query($sql);
-        echo $sql."<br>";
+        $sql = "DELETE FROM `tbl_players` WHERE `team_id` = '".$id."'";
+		$db->query($sql);
         $sql = "DELETE FROM `tbl_matches` WHERE `team_id_a` = '".$id."' OR `team_id_b` = '".$id."'";
         $db->query($sql);
 		$sql = "DELETE FROM `tbl_teams` WHERE `id` = '".$id."'";
 		$db->query($sql);
-        echo $sql."<br>";
-		$sql = "DELETE FROM `tbl_players` WHERE `team_id` = '".$id."'";
-		$db->query($sql);
-        echo $sql."<br>";
 		unset($_SESSION['selectTeam']);
 	}
 	elseif (isset($_POST[$obj['name']]) && $_POST[$obj['name']] == $obj['name']) {

@@ -65,9 +65,9 @@ if (isset($_POST['team2'])) {
 		                            <div class="teamname">
 		                            	<?php 
 		                            	if (isset($_POST['team1'])) {
-		                            		$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = ".$_POST['team1']."";
-		                            		$result = $db->query($sql);
-    										$obj = $result->fetch(PDO::FETCH_ASSOC);
+		                            		$sql = $db->prepare("SELECT `name` FROM `tbl_teams` WHERE `id` = ?");
+		                            		$sql->execute(array($_POST['team1']));
+											$obj = $sql->fetch(PDO::FETCH_ASSOC);
     										echo "<p>".$obj['name']."</p>";
 		                            	}
 		                            	 ?>
@@ -75,9 +75,9 @@ if (isset($_POST['team2'])) {
 		                            <div class="teamname">
 		                            	<?php 
 		                            	if (isset($_POST['team2'])) {
-		                            		$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = ".$_POST['team2']."";
-		                            		$result = $db->query($sql);
-    										$obj = $result->fetch(PDO::FETCH_ASSOC);
+		                            		$sql = $db->prepare("SELECT `name` FROM `tbl_teams` WHERE `id` = ?");
+		                            		$sql->execute(array($_POST['team2']));
+											$obj = $sql->fetch(PDO::FETCH_ASSOC);
     										echo "<p>".$obj['name']."</p>";
 		                            	}
 		                            	 ?>
@@ -106,13 +106,13 @@ if (isset($_POST['team2'])) {
 										<?php 
 										echo '<option>Select scoorder</option>';
 										if (isset($_SESSION['team1'])) {
-											$sql = "SELECT * FROM `tbl_players` WHERE `team_id` = ".$_SESSION['team1']."";
-				                            $playerCount = $db->query($sql)->rowCount();
+											$sql = $db->prepare("SELECT * FROM `tbl_players` WHERE `team_id` = ?");
+											$playerCount = $sql->execute(array($_SESSION['team1']))->rowCount();
 				                            $id = 0;
 											for ($i=0; $i <= $playerCount; $i++) { 
-												$sql = "SELECT `first_name`, `last_name`, `id` FROM `tbl_players` WHERE `id` > $id AND `team_id` = ".$_SESSION['team1']."";
-												$result = $db->query($sql);
-				                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
+												$sql = $db->prepare("SELECT `first_name`, `last_name`, `id` FROM `tbl_players` WHERE `id` > $id AND `team_id` = ?");
+												$sql->execute(array($_POST['team1']));
+												$obj = $sql->fetch(PDO::FETCH_ASSOC);
 				                            	$players = $obj;
 				                            	$id = $obj['id'];
 				                            	if ($obj['first_name'] != "" || $obj['last_name'] != "") {
@@ -144,13 +144,13 @@ if (isset($_POST['team2'])) {
 										<?php 
 										echo '<option>Select scoorder</option>';
 										if (isset($_SESSION['team2'])) {
-											$sql = "SELECT * FROM `tbl_players` WHERE `team_id` = ".$_SESSION['team2']."";
-				                            $playerCount = $db->query($sql)->rowCount();
+											$sql = $db->prepare("SELECT * FROM `tbl_players` WHERE `team_id` = ?");
+											$playerCount = $sql->execute(array($_SESSION['team2']))->rowCount();
 				                            $id = 0;
 											for ($i=0; $i <= $playerCount; $i++) { 
-												$sql = "SELECT `first_name`, `last_name`, `id` FROM `tbl_players` WHERE `id` > $id AND `team_id` = ".$_SESSION['team2']."";
-												$result = $db->query($sql);
-				                            	$obj = $result->fetch(PDO::FETCH_ASSOC);
+												$sql = $db->prepare("SELECT `first_name`, `last_name`, `id` FROM `tbl_players` WHERE `id` > $id AND `team_id` = ?");
+												$sql->execute(array($_POST['team2']));
+												$obj = $sql->fetch(PDO::FETCH_ASSOC);
 				                            	$players = $obj;
 				                            	$id = $obj['id'];
 				                            	if ($obj['first_name'] != "" || $obj['last_name'] != "") {
@@ -201,14 +201,14 @@ if (isset($_POST['team2'])) {
 	                            	$base = $result->fetch(PDO::FETCH_ASSOC);
 	                            	$id = $base['id'];
 	                            	
-	                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_a']."'";
-	                            	$result = $db->query($sql);
-	                            	$row = $result->fetch(PDO::FETCH_ASSOC);
+	                            	$sql = $db->prepare("SELECT `name` FROM `tbl_teams` WHERE `id` = ?");
+	                            	$sql->execute(array($base['team_id_a']));
+									$obj = $sql->fetch(PDO::FETCH_ASSOC);
 	                            	$team1 = $row['name'];
 
-	                            	$sql = "SELECT `name` FROM `tbl_teams` WHERE `id` = '".$base['team_id_b']."'";
-	                            	$result = $db->query($sql);
-	                            	$row = $result->fetch(PDO::FETCH_ASSOC);
+	                            	$sql = $db->prepare("SELECT `name` FROM `tbl_teams` WHERE `id` = ?");
+	                            	$sql->execute(array($base['team_id_b']));
+									$obj = $sql->fetch(PDO::FETCH_ASSOC);
 	                            	$team2 = $row['name'];
 
 	                            	echo "

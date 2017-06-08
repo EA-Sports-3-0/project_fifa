@@ -14,18 +14,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         header("location:../public/index.php");
     }
 
-    $sql = "SELECT * FROM tbl_users
-            WHERE username = '$myusername' &&
-            password = '$mypassword'";
-
-    //mysqli type query. if you cant execut it: check database.php to see if it is also set to mysqli.
-    $match = $db->query($sql)->fetchColumn();
+    $sql = $db->prepare("SELECT * FROM tbl_users
+            WHERE username = ? AND
+            password = ?");
+    $sql->execute(array("$myusername", "$mypassword"));
+    $match = $sql->fetchColumn();
 
     if ($match == 1) {
-
-        $sql = "SELECT admin FROM tbl_users WHERE username = '$myusername'";
-
-        $handler = mysqli_query($db, $sql);
 
         $_SESSION['valid'] = true;
     }

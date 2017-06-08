@@ -118,9 +118,9 @@ if($ready == true)
 
 	$date = date("Y-m-d H:i:s"); 
 	if (isset($_SESSION['team1']) && isset($_SESSION['team2']) && $_SESSION['team1'] != "" && $_SESSION['team2'] != "") {
-		$sql = "SELECT * FROM `tbl_matches` WHERE `team_id_a` = '$team1' AND `team_id_b` = '$team2'";
-		$result = $db->query($sql);
-		$obj = $result->fetch(PDO::FETCH_ASSOC);
+		$sql = $db->prepare("SELECT * FROM `tbl_matches` WHERE `team_id_a` = ? AND `team_id_b` = ?");
+		$sql->execute(array("$team1", "$team2"));
+		$obj = $sql->fetch(PDO::FETCH_ASSOC);
 		$this_place_id = $obj['place_id'];
 		var_dump($obj['place_id']);
 		$team_id_a = $obj['team_id_a'];
@@ -252,12 +252,14 @@ if($ready == true)
 		}
 	}
 	if ($point1 != $point2) {
-		$sql = "UPDATE `tbl_matches` SET `score_team_a` = '$point1', `score_team_b` = '$point2' WHERE `place_id` = '$this_place_id'";
-		$db->query($sql);
+		$sql = "UPDATE `tbl_matches` SET `score_team_a` = ?, `score_team_b` = ? WHERE `place_id` = '$this_place_id'";
+		$sql->execute(array("$point1", "$point2"));
 	}
 
 	unset($_SESSION['scoorder1']);
 	unset($_SESSION['scoorder2']);
+	unset($_SESSION['team1']);
+	unset($_SESSION['team2']);
 }
 
 header("location:../public/invoeren_resultaten.php");
