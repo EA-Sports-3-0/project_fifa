@@ -107,11 +107,12 @@ if (isset($_POST['team2'])) {
 										echo '<option>Select scoorder</option>';
 										if (isset($_SESSION['team1'])) {
 											$sql = $db->prepare("SELECT * FROM `tbl_players` WHERE `team_id` = ?");
-											$playerCount = $sql->execute(array($_SESSION['team1']))->rowCount();
+											$sql->execute(array($_SESSION['team1']));
+											$playerCount = $sql->rowCount();
 				                            $id = 0;
 											for ($i=0; $i <= $playerCount; $i++) { 
 												$sql = $db->prepare("SELECT `first_name`, `last_name`, `id` FROM `tbl_players` WHERE `id` > $id AND `team_id` = ?");
-												$sql->execute(array($_POST['team1']));
+												$sql->execute(array($_SESSION['team1']));
 												$obj = $sql->fetch(PDO::FETCH_ASSOC);
 				                            	$players = $obj;
 				                            	$id = $obj['id'];
@@ -145,11 +146,12 @@ if (isset($_POST['team2'])) {
 										echo '<option>Select scoorder</option>';
 										if (isset($_SESSION['team2'])) {
 											$sql = $db->prepare("SELECT * FROM `tbl_players` WHERE `team_id` = ?");
-											$playerCount = $sql->execute(array($_SESSION['team2']))->rowCount();
+											$sql->execute(array($_SESSION['team2']));
+											$playerCount = $sql->rowCount();
 				                            $id = 0;
 											for ($i=0; $i <= $playerCount; $i++) { 
 												$sql = $db->prepare("SELECT `first_name`, `last_name`, `id` FROM `tbl_players` WHERE `id` > $id AND `team_id` = ?");
-												$sql->execute(array($_POST['team2']));
+												$sql->execute(array($_SESSION['team2']));
 												$obj = $sql->fetch(PDO::FETCH_ASSOC);
 				                            	$players = $obj;
 				                            	$id = $obj['id'];
@@ -203,12 +205,12 @@ if (isset($_POST['team2'])) {
 	                            	
 	                            	$sql = $db->prepare("SELECT `name` FROM `tbl_teams` WHERE `id` = ?");
 	                            	$sql->execute(array($base['team_id_a']));
-									$obj = $sql->fetch(PDO::FETCH_ASSOC);
+									$row = $sql->fetch(PDO::FETCH_ASSOC);
 	                            	$team1 = $row['name'];
 
 	                            	$sql = $db->prepare("SELECT `name` FROM `tbl_teams` WHERE `id` = ?");
 	                            	$sql->execute(array($base['team_id_b']));
-									$obj = $sql->fetch(PDO::FETCH_ASSOC);
+									$row = $sql->fetch(PDO::FETCH_ASSOC);
 	                            	$team2 = $row['name'];
 
 	                            	echo "

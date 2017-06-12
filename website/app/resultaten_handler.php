@@ -48,6 +48,8 @@ else{
 
 }
 
+
+
 // get the players who scoored from $_SESSION.
 
 if (isset($_SESSION['scoorder1'])) {

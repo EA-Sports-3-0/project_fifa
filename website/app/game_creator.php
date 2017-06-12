@@ -13,16 +13,19 @@ $sql = "SELECT * FROM `tbl_teams`";
 $teamCount = $db->query($sql)->rowCount();
 $teams = array();
 $teamsid = array();
+$teamsPid = array();
 $id = 0;
 for ($i=0; $i < $teamCount; $i++) { 
-	$sql = "SELECT `id`, `name` FROM `tbl_teams` WHERE `id` > $id";
+	$sql = "SELECT `id`, `name`, `poule_id` FROM `tbl_teams` WHERE `id` > $id";
 	$result = $db->query($sql);
 	$obj = $result->fetch(PDO::FETCH_ASSOC);
 	$id = $obj['id'];
 	$team = $obj['name'];
+	$pid = $obj['poule_id'];
 
 	array_push($teams, $team);
 	array_push($teamsid, $id);
+	array_push($teamsPid, $pid);
 
 }
 $amountOT = count($teams);
@@ -39,13 +42,13 @@ if ($amountOT >= 2) {
 	$db->query($sql);
 	$sql = "UPDATE `tbl_teams` SET `place_id` = '2' WHERE `id` = '".$teamsid['1']."'";
 	$db->query($sql);
-	$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['0']."', '".$teamsid['1']."', '".$date."','2', '1')";
+	$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['0']."', '".$teamsid['1']."', '".$date."','".$teamsPid['1']."', '1')";
 	$db->query($sql);
 
 	if ($amountOT == 3) {
 		$sql = "UPDATE `tbl_teams` SET `place_id` = 'w2' WHERE `id` = '".$teamsid['2']."'";
 		$db->query($sql);
-		$sql = "INSERT INTO `tbl_matches` (`team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['2']."', '".$date."','1', 'w1')";
+		$sql = "INSERT INTO `tbl_matches` (`team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['2']."', '".$date."','".$teamsPid['2']."', 'w1')";
 		$db->query($sql);
 	}
 	if($amountOT >= 4) {
@@ -53,14 +56,14 @@ if ($amountOT >= 2) {
 		$db->query($sql);
 		$sql = "UPDATE `tbl_teams` SET `place_id` = '4' WHERE `id` = '".$teamsid['3']."'";
 		$db->query($sql);
-		$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['2']."', '".$teamsid['3']."', '".$date."','2', '2')";
+		$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['2']."', '".$teamsid['3']."', '".$date."','".$teamsPid['3']."', '2')";
 		$db->query($sql);
 	}
 
 	if ($amountOT == 5) {
 		$sql = "UPDATE `tbl_teams` SET `place_id` = 'ww2' WHERE `id` = '".$teamsid['4']."'";
 		$db->query($sql);
-		$sql = "INSERT INTO `tbl_matches` (`team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['4']."', '".$date."','1', 'w2')";
+		$sql = "INSERT INTO `tbl_matches` (`team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['4']."', '".$date."','".$teamsPid['4']."', 'w2')";
 		$db->query($sql);
 	}
 	if($amountOT >= 6) {
@@ -68,14 +71,14 @@ if ($amountOT >= 2) {
 		$db->query($sql);
 		$sql = "UPDATE `tbl_teams` SET `place_id` = '6' WHERE `id` = '".$teamsid['5']."'";
 		$db->query($sql);
-		$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['4']."', '".$teamsid['5']."', '".$date."','2', '3')";
+		$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['4']."', '".$teamsid['5']."', '".$date."','".$teamsPid['5']."', '3')";
 		$db->query($sql);
 	}
 
 	if ($amountOT == 7) {
 		$sql = "UPDATE `tbl_teams` SET `place_id` = 'w4' WHERE `id` = '".$teamsid['6']."'";
 		$db->query($sql);
-		$sql = "INSERT INTO `tbl_matches` (`team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['6']."', '".$date."','1', 'w2')";
+		$sql = "INSERT INTO `tbl_matches` (`team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['6']."', '".$date."','".$teamsPid['6']."', 'w2')";
 		$db->query($sql);
 	}
 	if($amountOT >= 8) {
@@ -83,14 +86,14 @@ if ($amountOT >= 2) {
 		$db->query($sql);
 		$sql = "UPDATE `tbl_teams` SET `place_id` = '8' WHERE `id` = '".$teamsid['7']."'";
 		$db->query($sql);
-		$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['6']."', '".$teamsid['7']."', '".$date."','2', '4')";
+		$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['6']."', '".$teamsid['7']."', '".$date."','".$teamsPid['7']."', '4')";
 		$db->query($sql);
 	}
 
 	if ($amountOT == 9) {
 		$sql = "UPDATE `tbl_teams` SET `place_id` = 'www2' WHERE `id` = '".$teamsid['8']."'";
 		$db->query($sql);
-		$sql = "INSERT INTO `tbl_matches` (`team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['8']."', '".$date."','1', 'www1')";
+		$sql = "INSERT INTO `tbl_matches` (`team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['8']."', '".$date."','".$teamsPid['8']."', 'www1')";
 		$db->query($sql);
 	}
 	if($amountOT >= 10) {
@@ -98,14 +101,14 @@ if ($amountOT >= 2) {
 		$db->query($sql);
 		$sql = "UPDATE `tbl_teams` SET `place_id` = '10' WHERE `id` = '".$teamsid['9']."'";
 		$db->query($sql);
-		$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['8']."', '".$teamsid['9']."', '".$date."','2', '5')";
+		$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['8']."', '".$teamsid['9']."', '".$date."','".$teamsPid['9']."', '5')";
 		$db->query($sql);
 	}
 
 	if ($amountOT == 11) {
 		$sql = "UPDATE `tbl_teams` SET `place_id` = 'w6' WHERE `id` = '".$teamsid['10']."'";
 		$db->query($sql);
-		$sql = "INSERT INTO `tbl_matches` (`team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['10']."', '".$date."','1', 'w3')";
+		$sql = "INSERT INTO `tbl_matches` (`team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['10']."', '".$date."','".$teamsPid['10']."', 'w3')";
 		$db->query($sql);
 	}
 	if($amountOT >= 12) {
@@ -113,14 +116,14 @@ if ($amountOT >= 2) {
 		$db->query($sql);
 		$sql = "UPDATE `tbl_teams` SET `place_id` = '12' WHERE `id` = '".$teamsid['11']."'";
 		$db->query($sql);
-		$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['10']."', '".$teamsid['11']."', '".$date."','2', '6')";
+		$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['10']."', '".$teamsid['11']."', '".$date."','".$teamsPid['11']."', '6')";
 		$db->query($sql);
 	}
 
 	if ($amountOT == 13) {
 		$sql = "UPDATE `tbl_teams` SET `place_id` = 'ww4' WHERE `id` = '".$teamsid['12']."'";
 		$db->query($sql);
-		$sql = "INSERT INTO `tbl_matches` (`team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['12']."', '".$date."','1', 'ww2')";
+		$sql = "INSERT INTO `tbl_matches` (`team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['12']."', '".$date."','".$teamsPid['12']."', 'ww2')";
 		$db->query($sql);
 	}
 	if($amountOT >= 14) {
@@ -128,14 +131,14 @@ if ($amountOT >= 2) {
 		$db->query($sql);
 		$sql = "UPDATE `tbl_teams` SET `place_id` = '14' WHERE `id` = '".$teamsid['13']."'";
 		$db->query($sql);
-		$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['12']."', '".$teamsid['13']."', '".$date."','2', '7')";
+		$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['12']."', '".$teamsid['13']."', '".$date."','".$teamsPid['13']."', '7')";
 		$db->query($sql);
 	}
 
 	if ($amountOT == 15) {
 		$sql = "UPDATE `tbl_teams` SET `place_id` = 'w8' WHERE `id` = '".$teamsid['14']."'";
 		$db->query($sql);
-		$sql = "INSERT INTO `tbl_matches` (`team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['14']."', '".$date."','1', 'w4')";
+		$sql = "INSERT INTO `tbl_matches` (`team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['14']."', '".$date."','".$teamsPid['14']."', 'w4')";
 		$db->query($sql);
 	}
 	if($amountOT >= 16) {
@@ -143,7 +146,7 @@ if ($amountOT >= 2) {
 		$db->query($sql);
 		$sql = "UPDATE `tbl_teams` SET `place_id` = '16' WHERE `id` = '".$teamsid['15']."'";
 		$db->query($sql);
-		$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['14']."', '".$teamsid['15']."', '".$date."','2', '8')";
+		$sql = "INSERT INTO `tbl_matches` (`team_id_a`, `team_id_b`, `start_time`, `poule_id`, `place_id`) VALUES('".$teamsid['14']."', '".$teamsid['15']."', '".$date."','".$teamsPid['15']."', '8')";
 		$db->query($sql);
 	}
 }
