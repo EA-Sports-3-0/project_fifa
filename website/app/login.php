@@ -1,7 +1,5 @@
 <?php
-
 require ('database.php');
-
 session_start();
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -10,7 +8,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $myusername = $_POST['username'];
     $mypassword = $_POST['password'];
     if (empty($_POST["username"]) || empty($_POST["password"])) {
-        //send to login page
         header("location:../public/index.php");
     }
 
@@ -24,6 +21,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $_SESSION['valid'] = true;
     }
-    //send to home page.
     header("location:../public/index.php");
 }

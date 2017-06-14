@@ -99,7 +99,7 @@ if (isset($_POST['team2'])) {
 		                    </div>
 	                    </form>
 	                    <div class="scoorderselect">
-                            <div class="scoorder1">
+                        	<div class="scoorder1">
                             	<form method="post" action="#">
 		                            <select name="scoorder1">
 
@@ -380,3 +380,4 @@ if (isset($_POST['team2'])) {
     </div>
 
 <?php require("foot.php"); ?>
+

@@ -2,12 +2,10 @@
 require ('database.php');
 session_start();
 $ready = true;
-// check if the user is logged in; if not send to 405.html.
 if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 	header('location:405.html');
 }
 
-// check if all the required info is filled in.
 if (!isset($_SESSION['team1'])) {
 	$message = "vul alles in.";
 	header("location:../public/invoeren_resultaten.php?team1=$message");
@@ -48,10 +46,6 @@ else{
 
 }
 
-
-
-// get the players who scoored from $_SESSION.
-
 if (isset($_SESSION['scoorder1'])) {
 	$scoorder1 = $_SESSION['scoorder1'];
 }
@@ -61,7 +55,6 @@ if (isset($_SESSION['scoorder2'])) {
 }
 if (isset($scoorder1)) {
 	$scoorder1 = array_count_values($scoorder1);
-	var_dump($scoorder1);
 	foreach ($scoorder1 as $key => $points) {
 		$id = 0;
 		$sql = "SELECT * FROM `tbl_players`";
@@ -81,7 +74,6 @@ if (isset($scoorder1)) {
 }
 if (isset($scoorder2)) {
 	$scoorder1 = array_count_values($scoorder2);
-	var_dump($scoorder2);
 	foreach ($scoorder2 as $key => $points) {
 		$id = 0;
 		$sql = "SELECT * FROM `tbl_players`";
@@ -100,22 +92,14 @@ if (isset($scoorder2)) {
 	}
 }
 
-if($ready == true)
-{
+if($ready == true) {
 
-	var_dump($_SESSION);
-	// get team_id_a
 	$team1 = $_SESSION['team1'];
 	
-
-	// get team_id_b
 	$team2 = $_SESSION['team2'];
 	
-
-	// get score_team_a
 	$point1 = $_POST['point1'];
 
-	// get score_team_b
 	$point2 = $_POST['point2'];
 
 	$date = date("Y-m-d H:i:s"); 
@@ -124,13 +108,10 @@ if($ready == true)
 		$sql->execute(array("$team1", "$team2"));
 		$obj = $sql->fetch(PDO::FETCH_ASSOC);
 		$this_place_id = $obj['place_id'];
-		var_dump($obj['place_id']);
 		$team_id_a = $obj['team_id_a'];
 		$team_id_b = $obj['team_id_b'];
 		$score_team_a = $obj['score_team_a'];
 		$score_team_b = $obj['score_team_b'];
-
-		
 
 		$sql = "SELECT * FROM `tbl_matches`";
 		$matchCount = $db->query($sql)->rowCount();
@@ -150,8 +131,6 @@ if($ready == true)
 		$obj = $result->fetch(PDO::FETCH_ASSOC);
 		$team_id_a = $obj['team_id_a'];
 		$team_id_b = $obj['team_id_b'];
-
-
 
 		$upgrades = array(
 	 	'1' => 'w1',
@@ -184,7 +163,8 @@ if($ready == true)
 		'ww4' => 'www2',
 		'www1' => 'wwww1',
 		'www2' => 'wwww1',
-		'wwww1' => 'wwwww');
+		'wwww1' => 'wwwww',
+		'wwwww' => 'wwwww');
 
 		$next_place_id = $upgrades[$this_place_id];
 		if (!isset($obj['score_team_a']) || !isset($obj['score_team_b']) || $obj['score_team_a'] == NULL || $obj['score_team_a'] == NULL) {
@@ -254,14 +234,21 @@ if($ready == true)
 		}
 	}
 	if ($point1 != $point2) {
-		$sql = "UPDATE `tbl_matches` SET `score_team_a` = ?, `score_team_b` = ? WHERE `place_id` = '$this_place_id'";
-		$sql->execute(array("$point1", "$point2"));
+		if ($point1 == "") {
+			$point1 = 0;
+		}
+		if ($point2 == "") {
+			$point2 = 0;
+		}
+		$sql = $db->prepare("UPDATE `tbl_matches` SET `score_team_a` = ?, `score_team_b` = ? WHERE `place_id` = '$this_place_id'");
+		$sql->execute(array($point1, $point2));
 	}
 
 	unset($_SESSION['scoorder1']);
 	unset($_SESSION['scoorder2']);
 	unset($_SESSION['team1']);
 	unset($_SESSION['team2']);
+
 }
 
 header("location:../public/invoeren_resultaten.php");
