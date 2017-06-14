@@ -53,7 +53,6 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
 	        	$lname = $obj['last_name'];
 
 	    		array_push($fnames, "$fname");
-	    	                    	
 	    		array_push($lnames, "$lname");
 			}
 		}
